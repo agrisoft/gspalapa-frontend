@@ -516,6 +516,7 @@ Palapa.PetaV2 = (function(){
             _base.find('.toolbar > ul').append( Handlebars.templates['toolbar-layer'] );
             _toolbar.elLayer = _toolbar.el.find('#used-layer');
             _toolbar.elLayer.on('click', '.ico-checkmark', self.handleCheckmarkClick);
+            _toolbar.elLayer.on('click', '.layer-zoom-extent', self.handleZoomExtent);
             _toolbar.elLayer.on('click', '.layer-info', self.handleInfoClick);
             // _toolbar.elLayer.on('mouseenter', '.layer-remove', self.handleRemoveMousein);
             // _toolbar.elLayer.on('mouseout', '.layer-remove', self.handleRemoveMouseout);
@@ -536,6 +537,10 @@ Palapa.PetaV2 = (function(){
             _selectServer       = $('#select-server');
 
             _availableLayer.on('click', 'a', self.handleAddNewLayer);
+            $('#addlayer-custom-url').on('submit', 'form', function(){
+              $(this).find('.btn-add-wms').click();
+              return false;
+            });
             $('#addlayer-custom-url').on('click', '.btn-add-wms', self.handleAddCustomWMS);
             $('#addlayer-custom-url').on('click', '.btn-done', self.handleCancelCustomWMS);
             _selectServer.on('change', self.handleSelectServerWMS);
@@ -757,24 +762,30 @@ Palapa.PetaV2 = (function(){
 
                 url = self.prepareWMSURL(url) + 'request=GetCapabilities&service=wms';
 
-                $.ajax( url ).then(function(response) {
-                    _availableLayer.empty();
-                    if(response){
-                        var parser = new ol.format.WMSCapabilities();
-                        var result = parser.read(response);
-                        if(result && result.Capability && result.Capability.Layer && result.Capability.Layer.Layer){
-                            $.each(result.Capability.Layer.Layer, function(){
-                                var baseHTML = Handlebars.templates['layer-template-custom']({
-                                    title : this.Title,
-                                    layer : this.Name
-                                });
-                                _availableLayer.prepend(baseHTML);
-                            });
-                        }
-                    }
-                    _customLayerTextbox.css('background-color', '#ffffff');
-                    _customLayerTextbox[0].disabled = false;
-                });
+                $.ajax( url )
+                  .success(function(response) {
+                      _availableLayer.empty();
+                      if(response){
+                          var parser = new ol.format.WMSCapabilities();
+                          var result = parser.read(response);
+                          if(result && result.Capability && result.Capability.Layer && result.Capability.Layer.Layer){
+                              $.each(result.Capability.Layer.Layer, function(){
+                                  var baseHTML = Handlebars.templates['layer-template-custom']({
+                                      title : this.Title,
+                                      layer : this.Name
+                                  });
+                                  _availableLayer.prepend(baseHTML);
+                              });
+                          }
+                      }else{
+                      _availableLayer
+                          .empty()
+                          .append('<li><span class="title">Tidak ditemukan..</span></li>')
+                          .show();
+                      }
+                      _customLayerTextbox.css('background-color', '#ffffff');
+                      _customLayerTextbox[0].disabled = false;
+                  });
             }
         },
         handleCancelCustomWMS: function(e){
@@ -783,6 +794,7 @@ Palapa.PetaV2 = (function(){
             _availableLayer.hide();
             $('#addlayer-custom-url').removeClass('active');
             $('#addlayer-button').addClass('active');
+            $('#select-server').val(0);
         },
         handleAddNewLayer: function(e){
             e.preventDefault();
@@ -834,6 +846,14 @@ Palapa.PetaV2 = (function(){
                 layer.setVisible(false);
             }
         },
+        handleZoomExtent: function(e){
+            e.preventDefault();
+
+            var extent = $(this).closest('li').data('extent');
+            var map = Palapa.PetaV2.getMap();
+
+            map.getView().fit(extent,map.getSize());
+        },
         handleInfoClick: function(e){
             e.preventDefault();
 
@@ -851,6 +871,9 @@ Palapa.PetaV2 = (function(){
         handleRemoveMouseout: function(){
             $(this).removeClass('active');
         },
+        getMap: function(){
+          return _map;
+        },
         handleRemoveClick: function(e){
             e.preventDefault();
             var layer = $(this).closest('li').data('layer');
@@ -867,12 +890,22 @@ Palapa.PetaV2 = (function(){
             $('#'+layerId+'_opacity').remove();
 
         },
+        addZoomToExtent: function(baseHTML) {
+            var newHTML = '\n        <a href="#" class="ico-wrapper layer-zoom-extent">\n          <span class="ion-arrow-shrink"></span>\n        </a>';
+            var html = $(baseHTML);
+
+            $(html).find('.action').prepend(newHTML);
+            return html;
+        },
         addLayer: function(oLayer){
             var layer;
             var baseHTML = Handlebars.templates['layer-template']({
                 id    : oLayer.id,
                 title : oLayer.title
             });
+
+            baseHTML = this.addZoomToExtent(baseHTML);
+
             _toolbar.elLayer.prepend(baseHTML);
             var curEL = _toolbar.elLayer.find('#'+oLayer.id);
 
@@ -889,6 +922,8 @@ Palapa.PetaV2 = (function(){
             }
             _formData.layers[oLayer.id] = layerdata;
 
+            var extent = [];
+
             switch(oLayer.type){
                 case 'wms':
                     layer = new ol.layer.Image({
@@ -896,6 +931,7 @@ Palapa.PetaV2 = (function(){
                         visible:(typeof oLayer.visibility !== "undefined")?oLayer.visibility:true
                     });
                     var image = self.prepareWMSURL(oLayer.wms.url) + 'REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&WIDTH=20&HEIGHT=20&LEGEND_OPTIONS=forceRule:True;dx:0.2;dy:0.2;mx:0.2;my:0.2;border:false;fontColor:333333;fontSize:12&LAYER=' + oLayer.wms.params.LAYERS;
+                    var wmsInfo = self.prepareWMSURL(oLayer.wms.url) + 'request=GetCapabilities&service=wms';
 
                     self.addOpacityControl({
                       title: oLayer.title,
@@ -906,12 +942,35 @@ Palapa.PetaV2 = (function(){
                         image: image,
                         id: oLayer.id + '_legend'
                     });
+
+                    if(layer){
+                        _map.addLayer(layer);
+                        _layers[oLayer.id] = layer;
+                        curEL.data('layer', layer);
+                    }
+
+                    $.ajax( wmsInfo ).then(function(response) {
+                      var formatter = new ol.format.WMSCapabilities();
+                      var Capabilities = formatter.read(response);
+                      var currentLayer = null;
+
+                      Capabilities.Capability.Layer.Layer.map(function(currentLayer){
+                        if(currentLayer.Name === oLayer.wms.identifier){
+                          currentLayer.BoundingBox.map(function(bb){
+                            if(bb.crs === 'CRS:84'){
+                              var extent = ol.extent.boundingExtent([
+                                ol.proj.transform([bb.extent[0], bb.extent[1]], 'EPSG:4326', 'EPSG:3857'),
+                                ol.proj.transform([bb.extent[2], bb.extent[3]], 'EPSG:4326', 'EPSG:3857'),
+                              ]);
+                              curEL.data('extent', extent);
+                            }
+                          });
+                        }
+                      });
+
+                    });
+
                     break;
-            }
-            if(layer){
-                _map.addLayer(layer);
-                _layers[oLayer.id] = layer;
-                curEL.data('layer', layer);
             }
         },
         addOpacityControl: function(params){

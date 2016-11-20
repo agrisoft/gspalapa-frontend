@@ -223,7 +223,7 @@
                 height: 60px;
                 border-bottom: 1px solid #ddd;
                 position: relative;
-                padding: 10px 60px 10px 20px;
+                padding: 10px 40px 10px 20px;
                 background: #fff;
             }
             .exploremap .toolbar .flyout .content{
@@ -536,7 +536,7 @@
     .exploremap .list-layer .action{
         display: block;
         float: right;
-        width: 25%;
+        width: 30%;
         padding: 10px 10px 10px 0;
         text-align: right;
         font-size: 1.4em;
@@ -721,3 +721,14 @@
   padding: .5em 1em;
 }
 
+#addlayer-custom-url .btn-done {
+  padding-left: 0;
+  padding-right: 0;
+  width: 80px;
+}
+
+#addlayer-custom-url .btn-add-wms {
+  padding-left: 0;
+  padding-right: 0;
+  width: 53px;
+}
