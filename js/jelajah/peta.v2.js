@@ -670,7 +670,8 @@ Palapa.PetaV2 = (function(){
                             $.each(result.Capability.Layer.Layer, function(){
                                 var baseHTML = Handlebars.templates['layer-template-custom']({
                                     title : this.Title,
-                                    layer : this.Name
+                                    layer : this.Name,
+                                    identifier   : this.Name
                                 });
                                 _availableLayer.prepend(baseHTML);
                             });
@@ -814,6 +815,10 @@ Palapa.PetaV2 = (function(){
                 }
                 $(this).closest('li').addClass('added');
                 self.addLayer(params);
+                
+                var layer = $('#'+params.id).data('layer');
+                $('#'+params.id).find('.title').addClass('active');
+                layer.setVisible(true);
             }
 
         },
@@ -1143,6 +1148,7 @@ Palapa.PetaV2 = (function(){
             if(el.hasClass('active')){
                 return false;
             }
+
             // reset currently selected layer
             var selected = _toolbar.elBaseLayer.find('.selected');
             if(selected.length){
