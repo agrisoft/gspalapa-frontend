@@ -773,7 +773,8 @@ Palapa.PetaV2 = (function(){
                               $.each(result.Capability.Layer.Layer, function(){
                                   var baseHTML = Handlebars.templates['layer-template-custom']({
                                       title : this.Title,
-                                      layer : this.Name
+                                      layer : this.Name,
+                                      identifier : this.Name
                                   });
                                   _availableLayer.prepend(baseHTML);
                               });
