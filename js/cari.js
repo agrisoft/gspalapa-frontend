@@ -35,8 +35,6 @@ function getCsWRecords(query, bbox, start,callback){
     $.post(_cswURL,
         _xml, 
         function(data){
-            console.log(data);
-
             // var response = data["csw:GetRecordsResponse"];
             var searchresult = data["csw:GetRecordsResponse"]["csw:SearchResults"];
 
@@ -51,12 +49,9 @@ function getCsWRecords(query, bbox, start,callback){
                 nextRecord = 0;
             }
 
-            console.log(start);
 
             // nextRecord = nextRecord+maxRecords>totalMatchRecords?nextRecord+maxRecords:1;
             prevRecord = start-maxRecords;
-            console.log(nextRecord);
-            console.log(prevRecord);
             if(searchresult["@numberOfRecordsMatched"]>0){
                 var records = [];
                 if(searchresult["csw:Record"].length>1){
