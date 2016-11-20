@@ -32,8 +32,6 @@ function getCsWRecords(query, bbox, start,callback){
 
     _xml = _xml +'</ogc:Filter></csw:Constraint></csw:Query></csw:GetRecords>';
 
-console.log(_xml);
-
     $.post(_cswURL,
         _xml, 
         function(data){
@@ -128,8 +126,6 @@ console.log(_xml);
                 $(".paginate_button.previous").addClass("disabled");                    
             }
 
-
-            console.log(totalMatchRecords);
             if(totalMatchRecords>=1){
                 $("#content .page-header .row h5").html("Menampilkan "+returnMatchRecords+" dataset dari "+totalMatchRecords+ " dataset");
             }else{
@@ -156,7 +152,6 @@ function onMoveEnd(evt) {
     var topRight = ol.proj.transform(ol.extent.getTopRight(extent), 'EPSG:3857', 'EPSG:4326');
     $(".row .shop-list").html("");
   _bbox = [wrapLon(bottomLeft[0]), bottomLeft[1], wrapLon(topRight[0]), topRight[1]]; 
-  console.log(_bbox);
     getCsWRecords(_query, _bbox, 1, function(res){
         $(".row .shop-list").html(res);
     });
@@ -186,6 +181,7 @@ $(document).ready(function(){
         })
       ],
       controls: ol.control.defaults({
+        zoom:true,
         attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
           collapsible: false
         })
@@ -205,7 +201,7 @@ $(document).ready(function(){
           source: new ol.source.OSM()
         })
       ],
-      controls     : ol.control.defaults({ attribution: false, zoom: false }),
+      controls     : ol.control.defaults({ attribution: false, zoom: true }),
       target: 'map-preview',
       view: new ol.View({
         projection: 'EPSG:4326',

@@ -53,6 +53,7 @@ Palapa.PetaV2 = (function(){
                 self.setupInspector();
                 self.setupToolbar();
                 self.setupDefaultLayer();
+                self.setupProxy();
             }
         },
         getFormData: function(){
@@ -756,7 +757,7 @@ Palapa.PetaV2 = (function(){
 
                 url = self.prepareWMSURL(url) + 'request=GetCapabilities&service=wms';
 
-                $.ajax( _baseURL+'/proxy?url='+escape(url) ).then(function(response) {
+                $.ajax( url ).then(function(response) {
                     _availableLayer.empty();
                     if(response){
                         var parser = new ol.format.WMSCapabilities();
@@ -1097,6 +1098,15 @@ Palapa.PetaV2 = (function(){
 
             _baseLayers[el.attr('id')].layer.setVisible(true);
         },
+        setupProxy:function(el){
+            if(_proxy){
+                $.ajaxSetup({
+                    beforeSend: function(xhr, o) {
+                        o.url = _proxy+o.url;
+                    }
+                });
+            }            
+        }
     };
     return self;
 })();

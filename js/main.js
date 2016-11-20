@@ -232,6 +232,7 @@ var _listWMS = [];
         }
       ]
     }];
+var _proxy = 'http://palapa.agrisoft-cb.com/gs/api/proxy?url=';
 var _cswURL = 'http://palapa.agrisoft-cb.com/csw';
 var _wmsURL = 'http://palapa.agrisoft-cb.com:8080/geoserver/wms?';
 
