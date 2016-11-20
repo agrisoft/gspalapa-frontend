@@ -18,6 +18,8 @@ Palapa.Peta = (function(){
             _base = $('#eksplor-peta');
             if(_base.length){
                 self.setupResize();
+
+                window.onresize = self.setupResize;
                 // self.setupMap();
             }
             _baseIndex = $('#peta');
@@ -139,11 +141,12 @@ Palapa.Peta = (function(){
             li.addClass('current');
         },
         setupResize: function(){
-            var headerHeight = 118+50;
-            if($('.page-title').length){
-                headerHeight += $('.page-title').outerHeight();
-            }
-            var heights = window.innerHeight - headerHeight;
+            // var headerHeight = 118+50;
+            // if($('.page-title').length){
+            //     headerHeight += $('.page-title').outerHeight();
+            // }
+            var headerHeight = $('.navbar').outerHeight();
+            var heights = window.innerHeight - (headerHeight + 40);
             _base.height(heights);
         },
         setupMap: function(){
