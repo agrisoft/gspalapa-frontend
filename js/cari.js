@@ -189,7 +189,8 @@ $(document).ready(function(){
       target: 'mapfilter',
       view: new ol.View({
         center: ol.proj.transform([118, -2], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 2
+        zoom: 2,
+        minZoom:2
       })
     });
 
