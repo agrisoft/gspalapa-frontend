@@ -180,9 +180,7 @@ h6 {
 }
 
 .navbar-brand .text{
-    position: absolute;
-    top: 40%;
-    left: 150px;
+  padding-top: 7px;
 }
 
 
@@ -261,7 +259,7 @@ p strong {
 }
 
 #logo {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 400;
     text-transform: uppercase;
     font-family: 'Oswald', sans-serif;
@@ -431,7 +429,6 @@ body .navbar-default .navbar-nav > .active > a:hover {
     }
 
     .navbar-header {
-        padding: 40px 0 40px 0;
     }
     
     .nav hr {
@@ -445,7 +442,7 @@ body .navbar-default .navbar-nav > .active > a:hover {
     }
     
     .navbar-toggle {
-        margin: 0;
+        margin: 25px;
         margin-right: 10px;
 
         border: none;   
