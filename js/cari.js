@@ -40,11 +40,23 @@ function getCsWRecords(query, bbox, start,callback){
             // var response = data["csw:GetRecordsResponse"];
             var searchresult = data["csw:GetRecordsResponse"]["csw:SearchResults"];
 
-            console.log(searchresult);
             var totalMatchRecords = searchresult["@numberOfRecordsMatched"];
             var returnMatchRecords = searchresult["@numberOfRecordsReturned"];
-            nextRecord = nextRecord+maxRecords<=totalMatchRecords?nextRecord+maxRecords:0;
+
+            if(start==1){
+                nextRecord = searchresult["@nextRecord"]*1;
+            }else if(nextRecord+maxRecords<=totalMatchRecords){
+                nextRecord = nextRecord+maxRecords;
+            }else if(searchresult["@nextRecord"]==0){
+                nextRecord = 0;
+            }
+
+            console.log(start);
+
+            // nextRecord = nextRecord+maxRecords>totalMatchRecords?nextRecord+maxRecords:1;
             prevRecord = start-maxRecords;
+            console.log(nextRecord);
+            console.log(prevRecord);
             if(searchresult["@numberOfRecordsMatched"]>0){
                 var records = [];
                 if(searchresult["csw:Record"].length>1){
