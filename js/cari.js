@@ -106,7 +106,7 @@ console.log(_xml);
                             '          <div class="actions">',
                             '              '+wmsURL?'<button class="btn btn-primary btn-sm wms-preview" data-toggle="modal" data-target="#wms-preview" data-identifier="'+identifier+'" data-srs="EPSG:'+srs[(srs.length-1)]+'" data-wmsURL="'+wmsURL+'" data-bbox="['+bboxLC[1]+','+bboxLC[0]+','+bboxUC[1]+','+bboxUC[0]+']">wms</button> ':'',
                             '              '+wfsURL?'<button class="btn btn-primary btn-sm wfs-preview" data-zipURL="'+zipURL+'">WFS</button>':'',
-                            '              <button class="btn btn-primary btn-sm metadata-preview"  data-toggle="modal" data-target="#metadata-preview" data-metadata=\''+JSON.stringify(r)+'\' data-wmsurl="'+wmsURL+'" data-wfsurl="'+wfsURL+'" data-bbox="['+bboxLC[1]+','+bboxLC[0]+','+bboxUC[1]+','+bboxUC[0]+']">metadata</button>',
+                            '              <button class="btn btn-primary btn-sm metadata-preview"  data-toggle="modal" data-target="#metadata-preview" data-metadata=\''+JSON.stringify(r)+'\' data-wmsurl="'+wmsURL+'" data-wfsurl="'+wfsURL+'" data-bbox="['+bboxLC[1]+','+bboxLC[0]+','+bboxUC[1]+','+bboxUC[0]+']" data-fullmetadata="'+_cswURL+'?service=CSW&version=2.0.2&request=GetRecordById&ElementSetName=full&Id='+identifier+'&outputSchema=http://www.isotc211.org/2005/gmd">metadata</button>',
                             '          </div>',
                             '        </div>',
                             '        <div class="clear"></div>',
@@ -131,7 +131,7 @@ console.log(_xml);
 
             console.log(totalMatchRecords);
             if(totalMatchRecords>=1){
-                $("#content .page-header .row h5").html("Ditemukan sebanyak "+returnMatchRecords+" records dari "+totalMatchRecords);
+                $("#content .page-header .row h5").html("Menampilkan "+returnMatchRecords+" dataset dari "+totalMatchRecords+ " dataset");
             }else{
                 $("#content .page-header .row h5").html("Data tidak ditemukan.");
             }
@@ -251,6 +251,7 @@ $(document).ready(function(){
             var wmsURL = $(this).data("wmsurl");
             var wfsURL = $(this).data("wfsurl");
             var bbox = $(this).data("bbox");
+            var fullmetadata = $(this).data("fullmetadata");
             $('#metadata-preview td[rel=title]').html(metadata["dc:title"]);
             $('#metadata-preview td[rel=subject]').html(metadata["dc:subject"]["#text"]);
             $('#metadata-preview td[rel=type]').html(metadata["dc:type"]);
@@ -259,6 +260,14 @@ $(document).ready(function(){
             $('#metadata-preview td[rel=wms]').html(wmsURL);
             $('#metadata-preview td[rel=wfs]').html(wfsURL);
             $('#metadata-preview td[rel=bbox]').html("["+bbox.join(",")+"]");
+            $('#metadata-preview .btn-primary').attr("rel", fullmetadata);
+
+            $('#metadata-preview')
+                .off("click", ".btn-primary")
+                .on("click", ".btn-primary", function(){
+                    window.open($(this).attr("rel"),"_blank");
+                });
+
         })
         .on("click", ".paginate_button.next a", function(){
             if(!$(this).parent().hasClass("disabled")){
