@@ -100,7 +100,7 @@ function getCsWRecords(query, bbox, start,callback){
                             '    <div class="shop-list-item">',
                             '        <div class="image">',
                             '            <a href="#">',
-                            '                <img src="'+imgSrc+'" alt="Shop item image"/>',
+                            '                <img src="'+imgSrc+'" alt="'+identifier+'"/>',
                             '            </a>',
                             '        </div>',
                             '        <div class="detail">',
@@ -230,7 +230,7 @@ $(document).ready(function(){
             wmsLayer = new ol.layer.Tile({
               extent: bbox,
               source: new ol.source.TileWMS({
-                url: "http://palapa.agrisoft-cb.com:8080/geoserver/wms",
+                url: _wmsURL,
                 params: {'LAYERS': identifier},
                 serverType: 'geoserver'
               })

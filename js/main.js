@@ -1,3 +1,14 @@
+
+// URL CSW
+var _cswURL = 'http://palapa.agrisoft-cb.com/csw'; 
+
+// URL WMS
+var _wmsURL = 'http://palapa.agrisoft-cb.com:8080/geoserver/wms?';
+
+// URL PROXY if null not use Proxy
+var _proxy = 'http://palapa.agrisoft-cb.com/gs/api/proxy?url=';
+
+
 var Palapa = Palapa || {};
 
 Palapa.Global = (function(){
@@ -221,20 +232,18 @@ Palapa.Global = (function(){
 
 }(jQuery));
 
-var _baseURL = '';
+
+
 var _listWMS = [];
     _listWMS = [{
       "name":"Available Server",
       "list":[
         {
-          "name":"PALAPA Web Map Service",
-          "url":"http://palapa.agrisoft-cb.com:8080/geoserver/wms?"
+          "name": "PALAPA Web Map Service",
+          "url": _wmsURL
         }
       ]
     }];
-var _proxy = 'http://palapa.agrisoft-cb.com/gs/api/proxy?url=';
-var _cswURL = 'http://palapa.agrisoft-cb.com/csw';
-var _wmsURL = 'http://palapa.agrisoft-cb.com:8080/geoserver/wms?';
 
 $(document).ready(function(){
     Palapa.Global.initialize();

@@ -698,7 +698,7 @@ Palapa.PetaV2 = (function(){
         },
         setupDefaultLayer: function (e){
 
-            $.get("http://palapa.agrisoft-cb.com/gs/api/front_layers", function(data){
+            $.get("/gs/api/front_layers", function(data){
 
                 if(data.length>0){
                     $.each(data, function (index, item){
