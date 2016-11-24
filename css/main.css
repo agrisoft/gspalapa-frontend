@@ -498,7 +498,7 @@ body .navbar-default .navbar-nav > .active > a:hover {
 .main-feature,
 .main-feature .carousel,
 .main-feature .carousel .item {
-    max-height: 400px;
+    max-height: 600px;
     height: auto;
     margin: auto;
     text-align: center;
