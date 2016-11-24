@@ -1,3 +1,5 @@
+// URL base URL
+var _baseURL = "";
 
 // URL CSW
 var _cswURL = 'http://palapa.agrisoft-cb.com/csw'; 
