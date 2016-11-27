@@ -13,7 +13,8 @@
     position: relative;
     top: auto;
     width: 1020px;
-    margin: 0 auto;
+    margin: 20px auto 0;
+    border-radius: 20px 20px 0 0;
   }
   #navbar .nav {
     margin-right: 0;
@@ -21,9 +22,10 @@
   #main-feature-carousel {
     width: 1020px;
   }
-  .headline {
+  .headline.lg-block {
     width: 1020px;
     margin: 0 auto;
+    padding: 50px 0;
   }
   #features {
     width: 1020px;
@@ -31,18 +33,45 @@
     margin: 0 auto;
     background: #fff;
   }
+  #features .row {
+    margin: 0 -25px;
+    background: #dedede;
+  }
+  #features .text-center {
+    text-align: left;
+  }
+  .features .feature {
+    float: none;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 20px 100px 40px 200px;
+    border-top: 1px solid #f7f7f7;
+    background: #fff;
+  }
+  .features .feature .fa {
+    position: absolute;
+    left: 80px;
+    top: 50px;
+  }
+  .lg-block {
+    margin-bottom: 50px;
+  }
   .footer-section {
     width: 1020px;
     margin: 0 auto;
   }
   .footer-below {
     width: 1020px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
   }
 
   #eksplor-peta {
     width: 1020px !important;
     margin: 0 auto;
+  }
+  #area-peta {
+    background: #fff;
   }
 
   #content {
@@ -50,10 +79,7 @@
     margin: 0 auto;
     background: #fff;
   }
-}
-
-@media (min-width: 992px)and (min-width: 768px){
-  body {
-      margin: 0 !important;
+  .footer-below {
+    border-radius: 0 0 10px 10px;
   }
 }

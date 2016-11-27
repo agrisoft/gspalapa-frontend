@@ -145,8 +145,9 @@ Palapa.Peta = (function(){
             // if($('.page-title').length){
             //     headerHeight += $('.page-title').outerHeight();
             // }
-            var headerHeight = $('.navbar').outerHeight();
-            var heights = window.innerHeight - (headerHeight + 40);
+            var headerHeight = $('.navbar').outerHeight(true);
+            var footerHeight = $('.footer-below').outerHeight(true);
+            var heights = window.innerHeight - (headerHeight + footerHeight);
             _base.height(heights);
         },
         setupMap: function(){
