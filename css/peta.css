@@ -292,7 +292,7 @@
             display: block;
             color: #fff;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            height: 50px;
+            height: 40px;
             background: #475577;
             position: relative;
         }
@@ -304,17 +304,17 @@
                 font-size: 1.4em;
                 text-align: center;
                 display: block;
-                width: 50px;
-                height: 50px;
-                padding: .4em .5em;
+                width: 40px;
+                height: 40px;
+                padding: 10px 0 0;
             }
             .exploremap .inspector .parent span{
                 display: none;
                 position: absolute;
-                right: 50px;
+                right: 40px;
                 top: 0;
-                height: 50px;
-                padding: 1.2em 1em;
+                height: 40px;
+                padding: 10px 1em;
                 background: #475577;
                 font-size: .8em;
                 z-index: 777;
@@ -329,7 +329,7 @@
         .exploremap .inspector .flyout{
             position: absolute;
             top: 0;
-            right: 50px;
+            right: 40px;
             width: 280px;
             height: 450px;
             min-height: 150px;
@@ -400,7 +400,7 @@
                 display: block;
                 width: 40px;
                 height: 40px;
-                padding: .4em .5em;
+                padding: 10px 0 0;
             }
             .exploremap .controller .parent span{
                 display: none;
@@ -409,7 +409,7 @@
                 top: 0;
                 height: 40px;
                 white-space: nowrap;
-                padding: .8em 1em;
+                padding: 10px 1em;
                 background: #475577;
                 font-size: .8em;
                 z-index: 777;
