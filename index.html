@@ -58,6 +58,9 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse yamm" id="navigation">
+                    <div class="button navbar-right">
+                        <button class="navbar-btn nav-button wow bounceInRight" onclick=" window.open('login.html')" data-wow-delay="0.6s">Login</button>
+                    </div>
                     
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="dropdown ymm-sw " data-wow-delay="0.8s">
@@ -65,7 +68,7 @@
                         </li>
 
                         <li class="wow fadeInDown" data-wow-delay="0.3s"><a class="" href="jelajah.html">Jelajah</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.4s"><a class="" href="#">Tentang Kami</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.4s"><a class="" href="pencarian.html">Pencarian</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.6s"><a href="contact.html">Kontak</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -117,15 +120,17 @@
                                         <option>Vegetasi</option>
                                     </select>
                                 </div>
-                                <!-- <div class="form-group">                                     
-                                    <select id="basic" class="selectpicker show-tick form-control">
-                                        <option> -Status- </option>
-                                        <option>Rent </option>
-                                        <option>Boy</option>
-                                        <option>used</option>  
+                                 <div class="form-group">                                     
+                                    <!-- <select id="basic" class="selectpicker show-tick form-control"> -->
+                                    <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Semua Wali Data">
+                                        <option>Bappeda </option>
+                                        <option>Dinas Kominfo</option>
+                                        <option>Dinas Perhubungan</option>
+                                        <option>Dinas PU</option>
+                                        <option>Dinas Tata Kota</option>  
 
                                     </select>
-                                </div> -->
+                                </div> 
                                 <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
 
                                 <div style="display: none;" class="search-toggle">
@@ -135,14 +140,7 @@
                                         <img src="assets/img/maps.png" alt="">
                                         <!-- End of  -->  
 
-                                        <div class="form-group mar-l-20">
-                                            <label for="property-geo">Property geo (m2) :</label>
-                                            <input type="text" class="span2" value="" data-slider-min="0" 
-                                                   data-slider-max="600" data-slider-step="5" 
-                                                   data-slider-value="[50,450]" id="property-geo" ><br />
-                                            <b class="pull-left color">40m</b> 
-                                            <b class="pull-right color">12000m</b>
-                                        </div>
+                                        
                                         <!-- End of  --> 
                                     </div>
 
