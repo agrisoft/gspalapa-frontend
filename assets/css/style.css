@@ -17,7 +17,8 @@ body {
 
 .text_logo{
     padding-left: 70px;
-    padding-top: 25px;
+    padding-top: 4px;
+    font-size: 26px;
 }
 
 /*           Font Smoothing      */
@@ -701,6 +702,7 @@ label small{
     font-weight: 400;
     text-transform: capitalize;
     position: relative;
+    padding-top: 10px;
 
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
@@ -715,9 +717,9 @@ label small{
 .navbar-default .navbar-nav > li > a.active:after{
 
     background-color: #FDC600;
-    bottom: -24px;
+    bottom: -3px;
     content: "";
-    height: 5px;
+    height: 4px;
     left: 0;
     position: absolute;
     transition: all 0.2s ease 0s;
@@ -725,9 +727,9 @@ label small{
 }
 .navbar-default .navbar-nav > li > a::after {
     background-color: #FDC600;
-    bottom: -24px;
+    bottom: -3px;
     content: "";
-    height: 5px;
+    height: 4px;
     left: 0;
     position: absolute;
     transition: all 0.2s ease 0s;
@@ -741,20 +743,22 @@ label small{
     margin-right: 20px
 }
 .navbar-brand {
-
+	margin-top: -25px;
+	width: 80px;
+	height: 80px;
 }
 .main-nav {
-    padding-top: 10px;
+    padding-top: 0px;
 }
 .button.navbar-right {
-    padding-top: 10px;
+    padding-top: 0px;
 }
 .nav-button {
     background-color: #c2c2c2;
     border: medium none;
     color: #fff;
     font-size: 16px;
-    padding: 8px 20px;
+    padding: 5px 14px;
     border-radius: 2px;
     -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
@@ -771,7 +775,7 @@ label small{
 }
 .navbar{
     margin-bottom: 0px;
-    min-height: 100px;
+    min-height: 70px;
 }
 .navbar-default {
     width: 100%;
@@ -1514,7 +1518,7 @@ Asside widgets CSS
 
 .testimonial{
     position: relative;
-    margin-top: 50px; 
+    margin-top: 30px; 
 }
 .testimonial .item {
     padding-bottom: 67px;
@@ -2485,16 +2489,16 @@ count-area
 }
 .search-form .search-toggle {
     margin-top: 20px;
-    overflow: hidden;
     color: #777;
     border-top: 1px solid #EAEAEA;
-    padding: 15px;
+    padding: 10px;
 }
 .search-form .form-inline .form-group { 
-    width: 235px;
+    width: 600px;
     text-align: left;
     letter-spacing: 0.5px;
 }
+
 .slider-selection { 
     background: #FDC600;
 }
@@ -2506,7 +2510,7 @@ count-area
 }
 .search-form .dropdown-menu > li > a {
     display: block;
-    padding: 9px 20px;
+    padding: 5px 15px;
     clear: both;
     font-weight: 400;
     line-height: 1.42857;
