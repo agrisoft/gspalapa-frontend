@@ -21,6 +21,10 @@ body {
     font-size: 26px;
 }
 
+.cursor_pointer{
+    cursor: pointer;
+}
+
 /*           Font Smoothing      */
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, .btn-simple{
@@ -1531,19 +1535,20 @@ Asside widgets CSS
     text-align: center;
 }
 .client-face > img {
-    border: 5px solid #fff;
-    border-radius: 50%;
+    border: 0px solid #fff;
+    border-radius: 10%;
 }
 .testimonial .owl-theme .owl-controls .owl-page span{
-    background: #FDC600
+    background: #FDC600;
 }
 .client-text {
     border-radius: 2px;
-    padding: 20px 30px;
+    padding: 10px 10px;
     margin: 15px;
-    border: 1px solid #ECE9E9;
+    border: 0px solid #ECE9E9;
     background-color: #F5F5F5;
     margin-top: -15px;
+    text-align: center;
 }
 .client-text p {
     line-height: 25px;
@@ -1554,6 +1559,10 @@ Asside widgets CSS
 }
 .client-text h4 i{
     font-size: 13px
+}
+.client-text h6 {
+    font-size: 12px;
+    font-weight: 500;
 }
 /*Tools CSS*/
 .p0{
