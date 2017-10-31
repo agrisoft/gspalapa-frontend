@@ -36,7 +36,7 @@ $(document).ready(function () {
     $("#bg-slider").owlCarousel({
         navigation: false, // Show next and prev buttons
         slideSpeed: 100,
-        autoPlay: 5000,
+        autoPlay: 4000,
         paginationSpeed: 100,
         singleItem: true,
         mouseDrag: false,
@@ -56,12 +56,12 @@ $(document).ready(function () {
         items: 3
 
     });
-    $("#testimonial-slider").owlCarousel({
+    $("#walidata-logo-slider").owlCarousel({
         navigation: false, // Show next and prev buttons
-        slideSpeed: 100,
+        slideSpeed: 200,
         pagination: true,
-        paginationSpeed: 100,
-        items: 3
+        paginationSpeed: 300,
+        items: 5
     });
 
     $('#price-range').slider();
