@@ -17,10 +17,10 @@
         <link rel="icon" href="favicon.ico" type="image/x-icon">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" type="text/css" />
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" type="text/css" /> -->
 
         <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+        <!-- <link rel="stylesheet" href="assets/css/font-awesome.min.css"> -->
         <link rel="stylesheet" href="assets/css/fontello.css">
         <link href="assets/css/animate.css" rel="stylesheet" media="screen">
         <link rel="stylesheet" href="assets/css/bootstrap-select.min.css"> 
@@ -33,16 +33,26 @@
         <link rel="stylesheet" href="assets/css/jelajah.css" type="text/css" />
         <link rel="stylesheet" href="assets/css/peta.css" type="text/css" />
         <link rel="stylesheet" href="assets/css/ol.css" type="text/css" />
-        <link rel="stylesheet" href="assets/css/main/main.css" type="text/css" />
+        <!-- <link rel="stylesheet" href="assets/css/main/main.css" type="text/css" /> -->
         <link rel="stylesheet" href="assets/css/ionicons.css" type="text/css" />
 
+        <!-- CSS Jelajah -->
+        <link rel="stylesheet" href="assets/jelajah/css/style.css" type="text/css">
+        <!-- font-awesome-4.7.0 -->
+        <link rel="stylesheet" type="text/css" href="assets/jelajah/font-awesome-4.7.0/css/font-awesome.min.css">
+        
+        <!-- Include jQuery and jBox -->
+        <script src="assets/jelajah/js/jquery-3.2.1.js"></script>
+        <script src="assets/jelajah/js/jBox.js"></script>
+        <script src="assets/jelajah/js/jquery-ui.min.js"></script>
+        <link href="assets/jelajah/js/jBox.css" rel="stylesheet">
 
     </head>
     <body>
 
-        <div id="preloader">
+        <!-- <div id="preloader">
             <div id="status">&nbsp;</div>
-        </div>
+        </div> -->
 
         <nav class="navbar navbar-default">
             <div class="container">
@@ -62,10 +72,6 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse yamm" id="navigation">
-                   <!--  <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight" onclick=" window.open('login.html')" data-wow-delay="2s">Login</button>
-                    </div> -->
-                    
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="dropdown ymm-sw " data-wow-delay="0.5s">
                             <a href="index.html" data-delay="200">Home</a>
@@ -83,13 +89,284 @@
         <!-- Content / START -->
         <div id="content">
 
-            <div class="jelajah">
-                <section id="eksplor-peta">
-                    <div id="zmap" class="exploremap"></div>
-                </section>
-            </div>
+           <div class="col-md-12 clear-padding" style="height:100vh;">
+                <br>
+                <div class="row col-md-12 ">
+                    <!-- Search Box -->
+                    <form class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 clear-padding search" action="index.html" method="post">
+                        <input class="search-box" type="text" name="q" placeholder="Geocoding" value="">
+                        <ul class="results">
+                            <li><a href="index.html">Search Result #1<br /><span>Description...</span></a></li>
+                                <li><a href="index.html">Search Result #2<br /><span>Description...</span></a></li>
+                                    <li><a href="index.html">Search Result #3<br /><span>Description...</span></a></li>
+                            <li><a href="index.html">Search Result #4</a></li>
+                        </ul>
+                    </form>
+                    <!-- End Search Box -->
+                </div>
 
+                <!-- Controller -->
+                <div class="col-md-12 controller">
+                    <ul>
+                        <li><i class="fa fa-plus" title="Zoom In"></i></li>
+                        <li><i class="fa fa-minus" title="Zoom Out"></i></li>
+                        <li><i class="fa fa-home" title="Reset"></i></li>
+                        <li id="modal-basemap"><img title="Basemap" src="assets/jelajah/img/icon/basemap.png" alt=""></li>
+                    </ul>
+                </div>
+                <!-- End Controller -->
+
+                <!-- Konten Basemap -->
+                <div id="basemap" class="none">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste alias dolore exercitationem quis nemo reprehenderit perferendis eaque id ab asperiores. Quia similique quo error cumque reprehenderit? Quae doloribus illum reiciendis?</p>
+                </div>
+                <!-- End Basemap Content -->
+                
+
+                <!-- Sidebar Menu Opener -->
+                <div class="col-md-12 controller2">
+                    <i id="layerlist-toggle" class="fa fa-list-alt tooltips" title="Open layer list"></i>
+                </div>
+                <!-- END Sidebar Menu Opener -->
+
+                <!-- Hide and Expand Layer List -->
+                <script>
+                    $(document).ready(function() {
+                        $('#layerlist-toggle').click(function(){
+                            $('#layerlist').toggleClass('sidebar-on');
+                        });
+                    });
+                </script>
+
+                <!-- Sidebar Menu Layer List -->
+                <div id="layerlist" class="col-md-4 col-md-offset-8 col-sm-7 col-sm-offset-5 col-xs-9 col-xs-offset-3 sidebar-menu">
+                    <div class="col-md-12 title">
+                        <p>Overlay Layers <span title="Tambah Layer"><i id="modal-tambahlayer" class="fa fa-plus"></i></span></p>
+                    </div>
+
+                    <!-- Konten Tambah Layer -->
+                    <div id="tambah-layer" class="none">
+                        <div class="col-md-12 clear-padding"> <!-- Tab Selection -->
+                            <ul>
+                                <li class="tab-active">Dataset</li>
+                                <li>URL</li>
+                                <li>File</li>
+                                <li>Simpul</li>
+                            </ul>
+                        </div>
+
+                        <!-- Content Dataset -->
+                        <div class="dataset">
+                            <div class="search-dataset col-md-12">
+                                    <form class="form-inline" action="">
+                                        <div class="form-group">
+                                            <select name="" id="" class="">
+                                                <option value="">Semua Dataset</option>
+                                            </select>
+                                            <input type="text" class="" placeholder="Cari Layer">
+                                        </div>
+                                    </form>            
+                            </div>
+                            
+                            <div class="dataset-result col-md-12">
+                                <p>Wilayah Pelayanan (Development Area) <i id="modal-development1" class="fa fa-plus"></i></p>
+                            </div>
+
+                            <!-- Popup box development area -->
+                            <div id="development1" class="none">    
+                                <div class="col-md-12">
+                                        <p>
+                                            <span><i class="fa fa-circle"></i> Sungai (River)</span> <span class="add-icon"><i class="fa fa-user"></i> <i class="fa fa-user"></i> <i class="fa fa-user"></i> <i class="fa fa-user"></i></span>
+                                        </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- End Tambah Layer -->
+
+                    <div class="col-md-12 layer-list">
+                        
+                      <!-- Jquery ui sortable -->
+                      <script>
+                        $( function() {
+                          $("#sortable").sortable({
+                            revert: true
+                          });
+                          $("#draggable").draggable({
+                            connectToSortable: "#sortable",
+                            helper: "clone",
+                            revert: "invalid"
+                          });
+                          $( "ul, li" ).disableSelection();
+                        } );
+                      </script>
+                      <!-- Jquery ui sortable -->
+                        <ul id="sortable">
+                            <!-- Layer 1 -->
+                            <li class="ui-state-default">
+                                <div class="col-md-12 layer-box">
+                                    <div class="layer-name">
+                                        <input type="checkbox" style="margin:0; padding:0;"><span>Zoning Overlay</span>
+                                    </div>
+
+                                    <div class="col-md-12 clear-padding layer-toolbar">
+                                        <div class="col-md-4 clear-padding">
+                                            <div class="tools-icon" style="background-color:#F64747; color:#fff;"><i class="fa fa-trash a" title="Delete"></i></div>
+                                            <div class="tools-icon"><i id="toggleLegend-1" class="legend-toggle fa fa-list-alt b" title="Expand Legend"></i></div>
+                                            <div class="tools-icon"><i class="fa fa-eye c" title="Zoom to Extend"></i></div>
+                                        </div>
+                                        <div class="col-md-8 clear-padding">
+                                            <i class="fa fa-adjust"></i><input id="range-bar1" type="range" min="0" max="100" value="0"> <span id="value-bar1"></span>
+                                            <!-- INPUT TYPE RANGE VALUE -->
+                                            <script>
+                                                var slider1 = document.getElementById("range-bar1");
+                                                var output1 = document.getElementById("value-bar1");
+                                                output1.innerHTML = slider1.value + "%";
+                    
+                                                slider1.oninput = function() {
+                                                output1.innerHTML = this.value + "%";
+                                                }
+                                            </script>
+                                        </div>
+                                    </div>
+
+                                    <!-- HIDE AND SHOW LEGEND LIST -->
+                                    <script type="text/javascript">
+                                        $(document).ready(function(){
+                                            $('#toggleLegend-1').click(function(){
+                                            $('#Legend-1').toggle('fast');
+                                            });
+                                        });
+                                    </script>
+
+                                    <div id="Legend-1" class="col-md-12 clear-padding layer-content none">
+                                        <p> &nbsp; <i class="tools-icon fa fa-building"></i> Gedung / Bangunan </p>
+                                        <p> &nbsp; <i class="tools-icon fa fa-building"></i> Gedung / Bangunan </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- Layer 1 -->
+
+                            <!-- Layer 2 -->
+                            <li class="ui-state-default">
+                                    <div class="col-md-12 layer-box">
+                                        <div class="layer-name">
+                                            <input type="checkbox" style="margin:0; padding:0;"><span>Zoning Overlay</span>
+                                        </div>
+    
+                                        <div class="col-md-12 clear-padding layer-toolbar">
+                                            <div class="col-md-4 clear-padding">
+                                                <div class="tools-icon" style="background-color:#F64747; color:#fff;"><i class="fa fa-trash a" title="Delete"></i></div>
+                                                <div class="tools-icon"><i id="toggleLegend-2" class="legend-toggle fa fa-list-alt b" title="Expand Legend"></i></div>
+                                                <div class="tools-icon"><i class="fa fa-eye c" title="Zoom to Extend"></i></div>
+                                            </div>
+                                            <div class="col-md-8 clear-padding">
+                                                <i class="fa fa-adjust"></i><input id="range-bar2" type="range" min="0" max="100" value="0"> <span id="value-bar2"></span>
+                                                <!-- INPUT TYPE RANGE VALUE -->
+                                                <script>
+                                                    var slider2 = document.getElementById("range-bar2");
+                                                    var output2 = document.getElementById("value-bar2");
+                                                    output2.innerHTML = slider2.value + "%";
+                        
+                                                    slider2.oninput = function() {
+                                                    output2.innerHTML = this.value + "%";
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+    
+                                        <!-- HIDE AND SHOW LEGEND LIST -->
+                                        <script type="text/javascript">
+                                            $(document).ready(function(){
+                                                $('#toggleLegend-2').click(function(){
+                                                $('#Legend-2').toggle('fast');
+                                                });
+                                            });
+                                        </script>
+    
+                                        <div id="Legend-2" class="col-md-12 clear-padding layer-content none">
+                                            <p> &nbsp; <i class="tools-icon fa fa-building"></i> Gedung / Bangunan </p>
+                                            <p> &nbsp; <i class="tools-icon fa fa-building"></i> Gedung / Bangunan </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Layer 2 -->
+                            
+                            
+                            
+                        </ul>
+                    </div>
+                    
+                    <div class="col-md-12 title">
+                        <p>Cetak atau Ukur</p>
+                    </div>
+
+                    <div class="col-md-12 tools">
+                        <div class="col-xs-6"><span><i class="fa fa-balance-scale fa-lg" title="ukur"></i></span></div>
+                        <div class="col-xs-6"><span><i class="fa fa-print fa-lg" title="ukur"></i></span></div>
+                    </div>
+                </div>
+                <!-- END Sidebar Menu Layer List -->
+           </div>
+           
         </div><!-- Content / END -->
+
+    <!-- JBOX FUNCTION POPUP DRAGGABLE BOX -->
+    <script>
+            $(document).ready(function() {
+        
+              // tooltip
+              new jBox('Tooltip', {
+                attach: '.tooltip'
+              });
+        
+              // Drag with title
+              // jBox Basemap
+              new jBox('Modal', {
+                attach: '#modal-basemap',
+                width: 400,
+                responsiveWidth: true,
+                title: 'Basemap',
+                overlay: false,
+                content: $('#basemap'),
+                draggable: 'title',
+                repositionOnOpen: false,
+                repositionOnContent: false
+              });
+
+              // jbox tambah layer
+                new jBox('Modal', {
+                    attach: '#modal-tambahlayer',
+                    width: 450,
+                    title: 'Tambah Layer',
+                    overlay: false,
+                    content: $('#tambah-layer'),
+                    draggable: 'title',
+                    repositionOnOpen: false,
+                    repositionOnContent: false
+                });
+
+                // jbox tambah layer > development 1
+                new jBox('Modal', {
+                    attach: '#modal-development1',
+                    width: 450,
+                    title: 'Wilayah Pelayanan (Development Area)',
+                    overlay: false,
+                    content: $('#development1'),
+                    draggable: 'title',
+                    repositionOnOpen: false,
+                    repositionOnContent: false
+                });
+            });
+    </script>        
+
+
+
+
+
+
 
         <!-- Footer area-->
         <div class="footer-area">
