@@ -3067,3 +3067,13 @@ padding: 10px;
 #map {
     height: 300px;
 }
+
+
+.jumlah_dataset {
+    position: absolute;
+    top: -90px;
+    right: 5px;
+    border-radius: 30px;
+    padding: 8px 7px;
+    background-color: #ff3b30;
+}
