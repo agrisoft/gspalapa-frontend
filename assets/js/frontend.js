@@ -1,3 +1,4 @@
 $.get( _api + "group/listl", function( data ) {
-  console.log(data);
+  listdata = JSON.parse(data);
+  console.log(listdata);
 });
