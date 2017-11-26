@@ -19,6 +19,7 @@ body {
     padding-left: 0px;
     padding-top: 4px;
     font-size: 26px;
+    text-transform: uppercase;
 }
 
 .cursor_pointer{
@@ -3072,10 +3073,10 @@ padding: 10px;
 .jumlah_dataset {
     position: absolute;
     top: -90px;
-    right:35px;
-    border-radius: 30px;
+    right:40px;
+    border-radius: 50px;
     padding: 8px 7px;
-    background-color: #ff3b30;
+    background-color: #f60;
 }
 
 .jumlah_dataset_pencarian {
