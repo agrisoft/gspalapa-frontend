@@ -613,19 +613,20 @@
                             <div class="single-footer">
                                 <h4>Tentang Kami </h4>
                                 <div class="footer-title-line"></div>
-
-                                Geoportal PALAPA dikembangkan oleh Badan Informasi Geospasial (BIG) dan dapat digunakan secara bebas oleh Kementerian dan Lembaga, Pemerintah Provinsi, Pemerintah Kota dan Kabupaten sebagai aplikasi simpul jaringan di instansi masing-masing. Geoportal PALAPA ini merupakan aplikasi open source.
+                                <!-- Ambil api tentang kami sistem info dari frontend.js-->
+                                <div id="footer-tentang-kami"></div>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer">
                                 <h4>Kontak Kami </h4>
                                 <div class="footer-title-line"></div>
-                                    Badan Informasi Geospasial (BIG) <br>
-                                    Jl. Raya Jakarta - Bogor KM. 46 Cibinong, Bogor, 16911, INDONESIA <br>
-                                    Email: info@big.go.id <br>
-                                    Telp: 021-87904762 <br>
-                                    Fax: 021-87904762 <br>
+                                    <!-- Ambil api sistem info dari frontend.js-->
+                                    <div id="organisasi"></div>
+                                    <div id="alamat-footer"></div>
+                                    <div id="email-footer"></div>
+                                    <div id="phone"></div>
+                                    <div id="fax"></div>
                             </div>
                         </div>
                         
@@ -757,6 +758,7 @@
             </div>
         </div>
 
+        <script src="assets/js/config.js"></script>
         <script src="assets/js/modernizr-2.6.2.min.js"></script>
         <script src="assets/js/jquery-1.10.2.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -768,8 +770,8 @@
         <script src="assets/js/wow.js"></script>
         <script src="assets/js/icheck.min.js"></script>
         <script src="assets/js/price-range.js"></script>
+        <script src="assets/js/frontend.js"></script>
         <script src="assets/js/main.js"></script>
-        <script src="assets/js/cari.js"></script>
 
     </body>
 </html>

@@ -56,13 +56,15 @@ $(document).ready(function () {
         items: 3
 
     });
-    $("#walidata-logo-slider").owlCarousel({
-        navigation: false, // Show next and prev buttons
-        slideSpeed: 200,
-        pagination: true,
-        paginationSpeed: 300,
-        items: 5
-    });
+    setTimeout(function () {
+        $("#walidata-logo-slider").owlCarousel({
+            navigation: false, // Show next and prev buttons
+            slideSpeed: 200,
+            pagination: true,
+            paginationSpeed: 300,
+            items: 5
+        });
+    }, 1000);
 
     $('#price-range').slider();
     $('#property-geo').slider();
