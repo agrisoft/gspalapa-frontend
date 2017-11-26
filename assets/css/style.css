@@ -16,7 +16,7 @@ body {
 }
 
 .text_logo{
-    padding-left: 70px;
+    padding-left: 0px;
     padding-top: 4px;
     font-size: 26px;
 }
@@ -3072,8 +3072,16 @@ padding: 10px;
 .jumlah_dataset {
     position: absolute;
     top: -90px;
-    right: 5px;
+    right:35px;
     border-radius: 30px;
     padding: 8px 7px;
     background-color: #ff3b30;
+}
+
+.jumlah_dataset_pencarian {
+    position: absolute;
+    right: 0px;
+    border-radius: 30px;
+    padding: 5px 7px;
+    background-color: #0c3;
 }
