@@ -64,7 +64,7 @@ $(document).ready(function () {
             paginationSpeed: 300,
             items: 5
         });
-    }, 1000);
+    }, 2000);
 
     $('#price-range').slider();
     $('#property-geo').slider();
