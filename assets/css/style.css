@@ -3086,3 +3086,9 @@ padding: 10px;
     padding: 5px 7px;
     background-color: #0c3;
 }
+
+.footer-fixed{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
