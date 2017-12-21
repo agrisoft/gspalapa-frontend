@@ -1,0 +1,72 @@
+.proerty-th .proerty-item {
+    background-color: #FFF;
+    margin: 10px;
+    /* min-height: 350px;
+    max-width: 350px; */
+}
+
+.proerty-th .proerty-item .item-thumb {
+    position: relative;
+    max-height: 275px;
+    min-height: 275px;
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.proerty-th .proerty-item .item-thumb img {
+    transition: all 0.2s linear 0s;
+    display: block;
+    position: relative;
+    /* top: 50%; */
+    width: 100%;
+    opacity: 0.7;
+    /* min-height: 225px; */
+    height: auto;
+    /* max-height: 265px; */
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.count-area .count-item-circle {
+    height: auto;
+    width: 80px;
+    border: 0px solid #777;
+    border-radius: 100%;
+    /* margin: 0px auto; */
+    position: relative;
+}
+
+#ltitle {}
+
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+#i_prev_map {
+    height: 300px;
+    width: 100%;
+}
+
+#brandlogoimg {
+    height: 56px;
+    padding-left: 8px;
+    padding-top: 8px;
+}
+
+#brandlogotxt {
+    position: absolute;
+    color: black;
+    display: inline-block;
+    font-size: 1.25rem;
+    padding: 0;
+    padding-left: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.orangeprefix {
+    color: #f60;
+}

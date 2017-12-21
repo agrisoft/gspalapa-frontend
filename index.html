@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title id="title-index"></title>
+    <meta name="description" content="Geoportal Palapa Badan Informasi Geospasial">
+    <meta name="author" content="Palapa">
+    <meta name="keyword" content="geoportal, big, palapa, geoportal palapa">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="assets/css/normalize.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/fontello.css">
+    <link href="assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
+    <link href="assets/fonts/icon-7-stroke/css/helper.css" rel="stylesheet">
+    <link href="assets/css/animate.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/icheck.min_all.css">
+    <link rel="stylesheet" href="assets/css/price-range.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.css">
+    <link rel="stylesheet" href="assets/css/owl.transitions.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+
+<body>
+    <script src="assets/js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="assets/js/jssor.slider-26.7.0.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+
+            var jssor_1_options = {
+              $AutoPlay: 1,
+              $Idle: 0,
+              $SlideDuration: 5000,
+              $SlideEasing: $Jease$.$Linear,
+              $PauseOnHover: 4,
+              $SlideWidth: 200,
+              $SlideSpacing: 5,
+              $Cols: 6,
+              $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$,
+                $Steps: 5
+              },
+              $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$
+              },
+              $Align: 0
+            };
+
+            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+            /*#region responsive code begin*/
+
+            var MAX_WIDTH = 980;
+
+            function ScaleSlider() {
+                var containerElement = jssor_1_slider.$Elmt.parentNode;
+                var containerWidth = containerElement.clientWidth;
+
+                if (containerWidth) {
+
+                    var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+
+                    jssor_1_slider.$ScaleWidth(expectedWidth);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+
+            ScaleSlider();
+
+            $(window).bind("load", ScaleSlider);
+            $(window).bind("resize", ScaleSlider);
+            $(window).bind("orientationchange", ScaleSlider);
+            /*#endregion responsive code end*/
+        });
+    </script>
+    <style>
+        /* jssor slider loading skin spin css */
+        
+        .jssorl-009-spin img {
+            animation-name: jssorl-009-spin;
+            animation-duration: 1.6s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        
+        @keyframes jssorl-009-spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .jssorb057 .i {
+            position: absolute;
+            cursor: pointer;
+        }
+        
+        .jssorb057 .i .b {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 2000;
+            stroke-miterlimit: 10;
+            stroke-opacity: 0.4;
+        }
+        
+        .jssorb057 .i:hover .b {
+            stroke-opacity: .7;
+        }
+        
+        .jssorb057 .iav .b {
+            stroke-opacity: 1;
+        }
+        
+        .jssorb057 .i.idn {
+            opacity: .3;
+        }
+        
+        .jssora073 {
+            display: block;
+            position: absolute;
+            cursor: pointer;
+        }
+        
+        .jssora073 .a {
+            fill: #ddd;
+            fill-opacity: .7;
+            stroke: #000;
+            stroke-width: 160;
+            stroke-miterlimit: 10;
+            stroke-opacity: .7;
+        }
+        
+        .jssora073:hover {
+            opacity: .8;
+        }
+        
+        .jssora073.jssora073dn {
+            opacity: .4;
+        }
+        
+        .jssora073.jssora073ds {
+            opacity: .3;
+            pointer-events: none;
+        }
+    </style>
+
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <img src="assets/img/logo_big.png" alt="" id="logos">
+                </a>
+                <span class="text_logo pull-left">
+                    <b>
+                        <font color="#f60" style="margin-right: -7px;">G</font>
+                        <font color="#666" id="organisasi-logo">EOPORTAL PALAPA</font>
+                        </font>
+                    </b>
+                </span>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse yamm" id="navigation">
+                <div class="button navbar-right">
+                   <a href="login.html">
+                        <button class="navbar-btn nav-button" data-wow-delay="0.4s">Login</button>
+                    </a>
+                </div>
+                <ul class="main-nav nav navbar-nav navbar-right">
+                    <li class="dropdown ymm-sw " data-wow-delay="0.8s">
+                        <a href="index.html" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Home</a>
+                    </li>
+
+                    <li><a class="" href="jelajah.html">Jelajah</a></li>
+                    <li><a class="" href="pencarian.html">Pencarian</a></li>
+                    <li><a class="" href="contact.html">Kontak</a></li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- End of nav bar -->
+
+    <div class="slider-area">
+        <div class="slider">
+            <div id="bg-slider" class="owl-carousel owl-theme">
+
+            </div>
+        </div>
+        <div class="slider-content">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+                    <h2 id="judul-slider-depan"></h2>
+                    <p class="">
+                        <font id="tagline" color="white" size="4px">
+                            GEOPORTAL PALAPA MENYEDIAKAN KATALOG DAN METADATA SERTA LAYANAN GIS BERBASIS WEB. APLIKASI SIMPUL JARINGAN PALAPA BERTUJUAN SEBAGAI SARANA BERBAGI DATA (DATA SHARING), PUBLIKASI DAN DISSEMINASI DATA
+                        </font>
+                    </p>
+                    <div class="search-form wow pulse" data-wow-delay="0.8s "">
+
+                        <form action="pencarian.html" class=" form-inline" method="get">
+                            <button id='burgermenu' class="btn  toggle-btn" type="button" title="Advance Search">
+                                <i class="fa fa-bars"></i>
+                            </button>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control keyword" placeholder="Kata kunci" name="keyword">
+                            </div>
+
+                            <button class="btn search-btn" type="submit" title="Cari" id="searchbtn">
+                                <i class="fa fa-search"></i>
+                            </button>
+
+                            <div style="display: none;" class="search-toggle">
+
+                                <div class="search-row">
+                                    <div class="panel-body search-widget">
+
+                                        <fieldset class="padding-5" style="float: left;">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div id="i_search_map" class="map"></div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset>
+                                            <div class="row padding-5">
+                                                <div class="col-xs-12">
+                                                    <select id="lunchBegins" class="selectpicker" name="kategori" data-live-search="true" data-live-search-style="begins" title="Semua Kategori">
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset>
+                                            <div class="row padding-5">
+                                                <div class="col-xs-12">
+                                                    <select id="lunchBegins2" data-live-search="true" name="walidata" class="selectpicker show-tick form-control" title="Semua Wali Data">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                        <fieldset>
+                                            <div class="row padding-5">
+                                                <div class="col-xs-12">
+                                                    <input value="" id="bbox" type="hidden" name="bbox" />
+                                                    <button class="button btn largesearch-btn" value="Search" id="searchbtn" type="submit">Search</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <br>
+
+                                <!-- End of  -->
+
+                                <hr>
+                            </div>
+
+                    </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Tittle Welcome -->
+    <div class="content-area home-area-1 recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                    <!-- /.feature title -->
+                    <h2>Tersedia di Geoportal Palapa</h2>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+
+    <!-- Inside Geoportal Palapa -->
+    <div class="Welcome-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 Welcome-entry  col-sm-12">
+                    <div class="col-md-5 col-md-offset-2 col-sm-6 col-xs-12">
+                        <div class="welcome_text wow fadeInLeft" data-wow-delay="0.3s" data-wow-offset="100">
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                                    <!-- /.feature title -->
+                                    <h2 style="font-size: 28px;">
+                                        <br>KONTEN</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- four box welcome -->
+                    <div class="col-md-5 col-sm-6 col-xs-12">
+                        <div class="welcome_services wow fadeInRight" data-wow-delay="0.3s" data-wow-offset="100">
+                            <div class="row">
+                                <div class="col-xs-6 m-padding">
+                                    <div class="welcome-estate">
+                                        <div class="welcome-icon">
+                                            <i class="pe-7s-home pe-4x"></i>
+                                        </div>
+                                        <h3>Web Gis</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 m-padding">
+                                    <div class="welcome-estate">
+                                        <div class="welcome-icon">
+                                            <i class="pe-7s-users pe-4x"></i>
+                                        </div>
+                                        <h3>
+                                            <font id="jumlah_wali_data" color="#f60"></font> Wali Data</h3>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 text-center">
+                                    <i class="welcome-circle"></i>
+                                </div>
+                                <div class="col-xs-6 m-padding">
+                                    <div class="welcome-estate">
+                                        <div class="welcome-icon">
+                                            <i class="pe-7s-notebook pe-4x"></i>
+                                        </div>
+                                        <h3>
+                                            <font color="#f60" id="jml_dataset"></font> Dataset</h3>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 m-padding">
+                                    <div class="welcome-estate">
+                                        <div class="welcome-icon">
+                                            <i class="pe-7s-help2 pe-4x"></i>
+                                        </div>
+                                        <h3>Dataset Terbaru </h3>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tittle Web Gis Banner-->
+    <div class="content-area home-area-1 recent-property" style="background-color: #fff; padding-bottom: 55px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                    <!-- /.feature title -->
+                    <h2>WEB GIS</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    <!-- Slider banner start here -->
+    <div id="jssor_1" style="position:relative;margin:0 auto;top:3px;left:0px;width:980px;height:120px;overflow:hidden;visibility:hidden;">
+        <!-- Loading Screen -->
+        <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+            <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="assets/img/banner/spin.svg" />
+        </div>
+        <div id="linkweb" data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:120px;overflow:hidden;">
+            <!-- <div><a href="#"><img data-u="image" src="assets/img/banner/ina.jpg" alt="TEST" target="_blank" /></a></div>
+            <div><a href="#"><img data-u="image" src="assets/img/banner/ina.jpg" alt="TEST" target="_blank" /></a></div>
+            <div><a href="#"><img data-u="image" src="assets/img/banner/ina.jpg" alt="TEST" target="_blank" /></a></div> -->
+        </div>
+        <!-- Bullet Navigator -->
+        <div data-u="navigator" class="jssorb057" style="position:absolute;bottom:12px;right:12px;" data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
+            <div data-u="prototype" class="i" style="width:16px;height:16px;">
+                <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                    <circle class="b" cx="8000" cy="8000" r="5000"></circle>
+                </svg>
+            </div>
+        </div>
+        <!-- Arrow Navigator -->
+        <div data-u="arrowleft" class="jssora073" style="width:50px;height:50px;top:0px;left:10px;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                <path class="a" d="M4037.7,8357.3l5891.8,5891.8c100.6,100.6,219.7,150.9,357.3,150.9s256.7-50.3,357.3-150.9 l1318.1-1318.1c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3L7745.9,8000l4216.4-4216.4 c100.6-100.6,150.9-219.7,150.9-357.3c0-137.6-50.3-256.7-150.9-357.3l-1318.1-1318.1c-100.6-100.6-219.7-150.9-357.3-150.9 s-256.7,50.3-357.3,150.9L4037.7,7642.7c-100.6,100.6-150.9,219.7-150.9,357.3C3886.8,8137.6,3937.1,8256.7,4037.7,8357.3 L4037.7,8357.3z"></path>
+            </svg>
+        </div>
+        <div data-u="arrowright" class="jssora073" style="width:50px;height:50px;top:0px;right:10px;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                <path class="a" d="M11962.3,8357.3l-5891.8,5891.8c-100.6,100.6-219.7,150.9-357.3,150.9s-256.7-50.3-357.3-150.9 L4037.7,12931c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3L8254.1,8000L4037.7,3783.6 c-100.6-100.6-150.9-219.7-150.9-357.3c0-137.6,50.3-256.7,150.9-357.3l1318.1-1318.1c100.6-100.6,219.7-150.9,357.3-150.9 s256.7,50.3,357.3,150.9l5891.8,5891.8c100.6,100.6,150.9,219.7,150.9,357.3C12113.2,8137.6,12062.9,8256.7,11962.3,8357.3 L11962.3,8357.3z"></path>
+            </svg>
+        </div>
+    </div>
+    <!-- <script type="text/javascript">jssor_1_slider_init();</script> -->
+
+    <!--Walidata -->
+
+    <div class="testimonial-area recent-property" style="background-color: #FCFCFC; padding-bottom: 15px; margin-top: 8px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                    <!-- /.feature title -->
+                    <h2>Wali Data </h2>
+                    <div id="tes"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row testimonial">
+                    <div class="col-md-12">
+                        <div id="walidata-logo-slider">
+                            <!-- <div class="item">
+                                    <div class="client-face wow fadeInRight" data-wow-delay=".9s"> 
+                                        <img src="assets/img/walidata/bappeda.png" alt="">
+                                    </div>
+                                    <div class="client-text">                                
+                                        <a href="#"><h4><strong>Bappeda </strong><i>Kota Bogor</i></h4></a>
+                                        <h6>10 dataset</h6>
+                                    </div>
+                                </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Count area -->
+    <div class="count-area" style="background-color: #F3F3F3;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                    <!-- /.feature title -->
+                    <h2>Kategori Dataset</h2>
+                </div>
+            </div>
+
+            <!-- Icon Section -->
+            <div class="row">
+                <div class="col-md-12 col-xs-12 percent-blocks m-main" data-waypoint-scroll="true">
+                    <div class="row">
+
+                        <div id="kategori_dataset">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Count area -->
+    <div class="count-area" style="padding-bottom: 40px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                    <!-- /.feature title -->
+                    <h2>Dataset Terbaru</h2>
+                </div>
+            </div>
+
+            <!-- New Dataset Section -->
+            <div class="col-md-12 clear">
+                <div id="list-type" class="proerty-th">
+
+
+
+                    <!-- <div class="col-sm-6 col-md-3 p0 wow fadeInUp animated" data-wow-delay="0.2s">
+                            <div class="box-two proerty-item">
+                                <div class="item-thumb">
+                                    <a href="#"><img src="assets/img/pencarian/jala.png"></a>
+                                    </div>
+
+                                    <div class="item-entry overflow">
+                                        <h5><a href="property-1.html"> Jala </a></h5>
+                                        <div class="dot-hr"></div>
+                                        <span class="pull-left"><b> Ketegori </span>
+                                        <span class="proerty-price pull-right">
+                                            <img src="assets/img/maps_look.png" width="20px" height="20px" title="Lihat peta" data-toggle="modal" data-target="#viewPeta" class="cursor_pointer">
+                                            <img src="assets/img/metadata.png" width="20px" height="20px" title="Lihat metadata" data-toggle="modal" data-target="#metaData" class="cursor_pointer">
+                                            <img src="assets/img/download.png" width="20px" height="20px" title="Download" data-toggle="modal" data-target="#downloadModal" class="cursor_pointer">
+                                        </span>
+                                        <p style="display: none;">Sebaran empang Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
+                                        <div class="property-icon">
+                                                Walidata  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer area-->
+    <div class="footer-area">
+
+        <div class=" footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-footer">
+                            <h4>Tentang Kami </h4>
+                            <div class="footer-title-line"></div>
+                            <!-- Ambil api tentang kami sistem info dari frontend.js-->
+                            <div id="footer-tentang-kami"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-footer">
+                            <h4>Kontak Kami </h4>
+                            <div class="footer-title-line"></div>
+                            <!-- Ambil api sistem info dari frontend.js-->
+                            <div id="organisasi"></div>
+                            <div id="alamat-footer"></div>
+                            <div id="email-footer"></div>
+                            <div id="phone"></div>
+                            <div id="fax"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                        <div class="single-footer news-letter">
+                            <h4>Didukung Oleh</h4>
+                            <div class="footer-title-line"></div>
+                            <p>Geoportal Palapa ini didukung oleh:</p>
+                            <div class="social pull-left">
+                                <ul>
+                                    <li>
+                                        <a class="wow fadeInUp animated" href="https://twitter.com/geoportal_palapa">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="wow fadeInUp animated" href="https://www.facebook.com/geoportal_palapa" data-wow-delay="0.2s">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="wow fadeInUp animated" href="https://plus.google.com/geoportal_palapa" data-wow-delay="0.3s">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="wow fadeInUp animated" href="https://instagram.com/geoportal_palapa" data-wow-delay="0.4s">
+                                            <i class="fa fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="wow fadeInUp animated" href="https://instagram.com/geoportal_palapa" data-wow-delay="0.6s">
+                                            <i class="fa fa-dribbble"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-copy text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="pull-left">
+                        <span> 2017 &copy;
+                            <a href="http://geoportal.big.go.id" target="_BLANK">Geoportal Palapa</a>.
+                            <a href="http://big.go.id" target="_BLANK">Badan Informasi Geospasial</a>. All rights reserved. </span>
+                    </div>
+                    <div class="bottom-menu pull-right">
+                        <ul>
+                            <li>
+                                <a class="" href="index.html" data-wow-delay="0.2s">Home</a>
+                            </li>
+                            <li>
+                                <a class="" href="jelajah.html" data-wow-delay="0.3s">Jelajah</a>
+                            </li>
+                            <li>
+                                <a class="" href="pencarian.html" data-wow-delay="0.4s">Pencarian</a>
+                            </li>
+                            <li>
+                                <a class="" href="contact.html" data-wow-delay="0.6s">Kontak</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal View Peta -->
+    <div class="modal fade" id="viewPeta" role="dialog">
+        <div class="modal-dialog" style="width: 50%;">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">WMS Preview</h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <div id="i_prev_map" class="map"></div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-primary submitBtn" onclick="submitContactForm()">SUBMIT</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Metadata -->
+    <div class="modal fade" id="metaData" role="dialog">
+        <div class="modal-dialog" style="width: 50%;">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Metadata</h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    Title jala
+                    <br> Subjek
+                    <br> Type dataset
+                    <br> Abstrak pendidikan 2017
+                    <br> Layer identifier PERAKP:jala_520420170418153146
+                    <br> WMS http://118.97.40.243:8080/geoserver/wms?
+                    <br> WFS http://118.97.40.243:8080/geoserver/wfs?
+                    <br> Bounding box [116.84,-9.11,118.33,-8.13]
+                    <br>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary submitBtn" onClick="metadataFull()">Metadata Lengkap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Download -->
+    <div class="modal fade" id="downloadModal" role="dialog">
+        <div class="modal-dialog" style="width: 50%;">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Konfirmasi Download</h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    Apakah anda ingin mengunduh dataset ini?
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary submitBtn" onClick="download()">Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/modernizr-2.6.2.min.js"></script>
+    <script src="assets/js/jquery-1.10.2.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bootstrap-select.min.js"></script>
+    <script src="assets/js/bootstrap-hover-dropdown.js"></script>
+    <script src="assets/js/easypiechart.min.js"></script>
+    <script src="assets/js/jquery.easypiechart.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/icheck.min.js"></script>
+    <script src="assets/js/price-range.js"></script>
+    <script src="assets/js/frontend.js"></script>
+    <script src="assets/js/main.js"></script>
+    <link rel="stylesheet" href="assets/css/override.css">
+    <link type="text/css" rel="stylesheet" href="assets/jelajah2/css/material-icons.css">
+    <!-- Openlayers -->
+    <link type="text/css" rel="stylesheet" href="assets/jelajah2/vendors/ol/ol.css">
+    <script type="text/javascript" src="assets/jelajah2/vendors/ol/ol.js"></script>
+</body>
+
+</html>
