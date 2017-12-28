@@ -2380,14 +2380,14 @@ count-area
 }
 .boy-sale-area {
     position: relative;
-    padding: 70px 0px;
+    padding: 50px 0px;
     background-color: #F3F3F3;
     color: #FFF;
 }
 
 .asks-first{
     background-color: rgb(225, 225, 225);
-    padding: 35px 0px 35px 30px;
+    padding: 35px 0px 35px 5px;
     position: relative;
     cursor: pointer;
 }
@@ -2399,17 +2399,17 @@ count-area
 }
 .asks-first-circle {
     float: left;
-    width: 70px;
-    height: 70px;
-    border: 2px solid #9C9C9C;
+    width: 60px;
+    height: 60px;
+    border: 0px solid #9C9C9C;
     border-radius: 100%;
     text-align: center;
-    margin-right: 15px;
+    margin-right: 5px;
 }
 .asks-first-circle span {
     vertical-align: middle;
-    font-size: 32px;
-    margin-top: 15px;
+    font-size: 28px;
+    margin-top: 0px;
     line-height: 1;
 }
 .asks-first-info{
@@ -2417,19 +2417,20 @@ count-area
     margin: 0px 65px 0px 85px;
 }
 .asks-first-info h2 {
-    font: 500 20px "Open Sans",sans-serif;
-    margin: 0px 0px 4px;
+    font: 400 18px "Open Sans",sans-serif;
+    margin: -10px 0px 4px -40px;
+    color: #f96;
     text-transform: uppercase;
 }
 .asks-first-info p {
     font: 400 13px "Open Sans",sans-serif;
-    margin: 0px;
+    margin: 0px 8px 0px -20px;
 }
 .asks-first-arrow{
     top: 0px;
     position: absolute;
     right: 0px;
-    width: 60px;
+    width: 50px;
     height: 100%;
     float: right;
     background: rgba(0, 0, 0, 0.07) none repeat scroll 0% 0%;
