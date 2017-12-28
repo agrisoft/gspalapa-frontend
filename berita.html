@@ -7,7 +7,7 @@
     <head>
        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title id="title-kontak"></title>
+        <title id="title-berita"></title>
         <meta name="description" content="Geoportal Palapa Badan Informasi Geospasial">
         <meta name="author" content="Palapa">
         <meta name="keyword" content="geoportal, big, palapa, geoportal palapa">
@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/icheck.min_all.css">
         <link rel="stylesheet" href="assets/css/owl.transitions.css">
+        <link rel="stylesheet" href="assets/js/jplist-master/css/jplist.pagination-bundle.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
     </head>
@@ -62,10 +63,10 @@
                         <li class="dropdown ymm-sw " data-wow-delay="0.5s">
                             <a href="index.html" data-delay="200">Home</a>
                         </li>
-                        <li><a class="" href="berita.html">Berita</a></li>
+                        <li><a class="active" href="berita.html">Berita</a></li>
                         <li><a class="" href="jelajah.html">Jelajah</a></li>
                         <li><a class="" href="pencarian.html">Pencarian</a></li>
-                        <li><a class="active" href="contact.html">Kontak</a></li>
+                        <li><a class="" href="contact.html">Kontak</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -78,95 +79,93 @@
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Contact page</h1>               
+                        <h1 class="page-title">Berita Geoportal</h1>               
                     </div>
                 </div>
             </div>
         </div>
         <!-- End page header -->
 
-        <!-- property area -->
-        <div class="content-area recent-property padding-top-30" style="background-color: #FFF;">
-            <div class="container">  
+        <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
+            <div class="container">   
                 <div class="row">
-                    <div class="col-md-10 col-md-offset-1"> 
-                        <div class="" id="contact1">                        
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <h3><i class="fa fa-map-marker"></i> Address</h3>
-                                    <div id="organisasi-body"> </div>
-                                    <div id="alamat-body"></div>
-                                    <strong id="country" style="text-transform: uppercase;"></strong>
-                                    </p>
-                                </div>
-                                <!-- /.col-sm-4 -->
-                                <div class="col-sm-4">
-                                    <h3><i class="fa fa-phone"></i> Call center</h3>
-                                    <p class="text-muted">Nomor kontak pengelola Geoportal:</p>
-                                    <strong>
-                                        <div id="phone-body"></div>
-                                        <div id="fax-body"></div>
-                                    </strong>
-                                </div>
-                                <!-- /.col-sm-4 -->
-                                <div class="col-sm-4">
-                                    <h3><i class="fa fa-envelope"></i> Email</h3>
-                                    <p class="text-muted">Kritik dan saran juga dapat dikirimkan melalui alamat email berikut:</p>
-                                    <p>
-                                        <strong><a href="mailto:info@big.go.id" id="email-body"></a></strong>
-                                    </p>
-                                </div>
-                                <!-- /.col-sm-4 -->
+                    <div class="blog-lst col-md-12 pl0">
+                        <section class="post">
+                            <div class="text-left padding-b-50">
+                                <h3 class="">BIG Pelopor Bidang Geospasial</h3>
+                                <div class="title-line"></div>
                             </div>
-                            <!-- /.row -->
-                            <hr>
-                            
-                            <!-- Untuk Map -->
-                            <!-- <div id="map"></div>
-                            <hr> -->
-                            
-                            <h2>Contact form</h2>
-                            <form id="formkontak" method="post">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="firstname">Nama</label>
-                                            <input type="text" class="form-control" id="nama">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="text" class="form-control" id="email">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="lastname">Alamat</label>
-                                            <input type="text" class="form-control" id="alamat">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="subject">Subject</label>
-                                            <input type="text" class="form-control" id="subject">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="message">Pesan</label>
-                                            <textarea id="pesan" class="form-control"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-12 text-center">
-                                         <a href="javascript:void(0);" class="btn btn-primary" onclick="save();"<i class="fa fa-envelope-o"></i>Kirim Pesan</a>
-                                    </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="date-comments">
+                                        <i class="fa fa-calendar-o"></i> December 20, 2017
+                                    </p>
                                 </div>
-                                <!-- /.row -->
-                            </form>
-                        </div>
-                    </div>    
+                            </div>
+                            <!-- <div class="image">
+                                <a href="detail_image.html">
+                                    <img src="assets/img/blog2.jpg" class="img-responsive" alt="Example blog post alt">
+                                </a>
+                            </div> -->
+                            <p class="intro">Konten berita loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Konten berita loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.. </p>
+                            <p class="read-more">
+                                <a href="detail_berita.html" class="btn btn-default btn-border">Selengkapnya..</a>
+                            </p>
+                        </section>   
+
+                        <section class="post">
+                            <div class="text-left padding-b-50">
+                                <h3 class="">Kerjasama Agrisoft Dengan BIG</h3>
+                                <div class="title-line wow fadeInRight animated"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="date-comments">
+                                        <i class="fa fa-calendar-o"></i> November 10, 2017
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <p class="intro">Konten berita loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Konten berita loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo..</p>
+                            <p class="read-more">
+                                <a href="detail_berita.html" class="btn btn-default btn-border">Selengkapnya..</a>
+                            </p>
+                        </section>  
+
+                        <section class="post">
+                            <div class="text-left padding-b-50">
+                                <h3 class="">Implementasi Geoportal Palapa</h3>
+                                <div  class="title-line wow fadeInRight animated"></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="date-comments">
+                                        <i class="fa fa-calendar-o"></i> October 15, 2017
+                                    </p>
+                                </div>
+                            </div>
+                            <p class="intro">Konten berita loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Konten berita loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum loremp ipsum. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo..</p>
+                            <p class="read-more">
+                                <a href="detail_berita.html" class="btn btn-default btn-border">Selengkapnya..</a>
+                            </p>
+                        </section>  
+
+                    </div>  
                 </div>
+
+                <div class="col-md-12">
+                    <div class="pull-right">
+                        <div class="jplist-panel panel-bottom">
+                            <!-- pagination -->
+                            <div class="jplist-pagination" data-control-animate-to-top="true" data-control-type="pagination" data-control-name="paging" data-control-action="paging">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -254,50 +253,16 @@
         <script src="assets/js/price-range.js"></script>
         <script src="assets/js/frontend.js"></script>
         <script src="assets/js/main.js"></script>
-        
+
+        <script src="assets/js/jplist-master/js/jplist.core.min.js"></script>
+        <!-- jPList sort buttons control -->
+        <script src="assets/js/jplist-master/js/jplist.sort-buttons.min.js"></script>
+        <script src="assets/js/jplist-master/js/jplist.list-grid-view.min.js"></script>
+        <script src="assets/js/jplist-master/js/jplist.pagination-bundle.min.js"></script>
+        <script src="assets/js/jplist-master/js/jplist.textbox-filter.min.js"></script>
+        <script src="assets/js/jplist-master/js/jplist.filter-dropdown-bundle.min.js"></script>
+
         <script type="text/javascript">
-            function save() {
-                //nama=data['nama'],email=data['email'],alamat=data['alamat'],subject=data['subject'],pesan=data['pesan']
-                var formdata = {
-                    'nama' : $('#nama').val(),
-                    'email' : $('#email').val(),
-                    'alamat' : $('#alamat').val(),
-                    'subject' : $('#subject').val(),
-                    'pesan' : $('#pesan').val()
-               
-                };
-               
-                // Returns successful data submission message when the entered information is stored in database.
-
-                if($('#nama').val()==''||$('#email').val()==''||$('#alamat').val()==''|| $('#pesan').val()==''||pesan=='')
-                {
-                    alert("Please Fill All Fields");
-                } 
-                else
-                {   
-                    $.ajax({
-                        url : _api+'kontakcreate',
-                        type: 'POST',
-                        data:  formdata,
-                        dataType: 'JSON',
-                        success: function(data)
-                        {
-                          
-                            alert("Data Kontak berhasil disimpan");
-                            $('#formkontak')[0].reset(); 
-                            console.log(data); 
-                          
-                        },
-                        error: function (jqXHR, textStatus, errorThrown)
-                        {
-                            alert('Error adding / update data'); 
-
-                        }
-                    });
-                } 
-                               
-            }    
-            
         </script>
 
     </body>
