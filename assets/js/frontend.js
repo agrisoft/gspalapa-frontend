@@ -109,6 +109,7 @@ $.get(_api + "sisteminfo", function(data) {
     $('#title-pencarian').text('Pencarian Data :: Geoportal ' + data['organization']);
     $('#title-kontak').text('Kontak Kami :: Geoportal ' + data['organization']);
     $('#title-login').text('Login :: Geoportal ' + data['organization']);
+    $('#title-berita').text('Berita :: Geoportal ' + data['organization']);
 
     $('#organisasi').text(data['organization']);
     $('#organisasi-body').text(data['organization']);
