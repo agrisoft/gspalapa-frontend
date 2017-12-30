@@ -2386,8 +2386,8 @@ count-area
 }
 
 .asks-first{
-    background-color: rgb(225, 225, 225);
-    padding: 35px 0px 35px 5px;
+    background-color: #996;
+    padding: 30px 0px 35px 5px;
     position: relative;
     cursor: pointer;
 }
@@ -2409,22 +2409,22 @@ count-area
 .asks-first-circle span {
     vertical-align: middle;
     font-size: 28px;
-    margin-top: 0px;
+    margin-top: -15px;
     line-height: 1;
 }
 .asks-first-info{
     color: #FFF;
-    margin: 0px 65px 0px 85px;
+    margin: 0px 40px 0px 85px;
 }
 .asks-first-info h2 {
-    font: 400 18px "Open Sans",sans-serif;
+    font: 400 16px "Open Sans",sans-serif;
     margin: -10px 0px 4px -40px;
-    color: #f96;
+    color: #fc0;
     text-transform: uppercase;
 }
 .asks-first-info p {
     font: 400 13px "Open Sans",sans-serif;
-    margin: 0px 8px 0px -20px;
+    margin: 10px 8px 0px -20px;
 }
 .asks-first-arrow{
     top: 0px;
