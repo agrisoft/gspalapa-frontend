@@ -2414,7 +2414,7 @@ count-area
 }
 .asks-first-info{
     color: #FFF;
-    margin: 0px 40px 0px 85px;
+    margin: 0px 20px 0px 85px;
 }
 .asks-first-info h2 {
     font: 400 16px "Open Sans",sans-serif;
@@ -2424,7 +2424,7 @@ count-area
 }
 .asks-first-info p {
     font: 400 13px "Open Sans",sans-serif;
-    margin: 10px 8px 0px -20px;
+    margin: 10px 8px 0px -40px;
 }
 .asks-first-arrow{
     top: 0px;
