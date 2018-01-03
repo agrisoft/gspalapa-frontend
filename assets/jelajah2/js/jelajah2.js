@@ -804,8 +804,10 @@ function getLocalLayers() {
             list_workspace = uniqueArray(listw);
             console.log(list_workspace);
             for (i = 0; i < data.length; i++) {
-                item_html = "<li id='" + data[i].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box_outline_blank</i> <span class='layermark' id='" + data[i].layer_nativename + "'>" + data[i].workspace + " " + data[i].layer_name + "</span></li>";
-                $('#layers_item_list').append(item_html);
+                if (data[i].layer_advertised) {
+                    item_html = "<li id='" + data[i].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box_outline_blank</i> <span class='layermark' id='" + data[i].layer_nativename + "'>" + data[i].workspace + " " + data[i].layer_name + "</span></li>";
+                    $('#layers_item_list').append(item_html);
+                }
             }
             for (k = 0; k < list_workspace.length; k++) {
                 w_html = "<option value='" + list_workspace[k] + "'>" + list_workspace[k] + "</option>";
@@ -884,7 +886,7 @@ function getDefLayers() {
             console.log(front_layers)
             for (i = 1; i < front_layers.length; i++) {
                 // setTimeout(() => {
-                layer = front_layers[i];
+                layer.push(front_layers[i]);
                 for (j = 1; j < raw_local_wms.length; j++) {
                     if (raw_local_wms[j].layer_nativename == layer.layer_nativename) {
                         console.log(raw_local_wms[j], layer.layer_nativename, layer.layer_title, layer.layer_nativename, layer.aktif, raw_local_wms[j].layer_minx, raw_local_wms[j].layer_miny, raw_local_wms[j].layer_maxx, raw_local_wms[j].layer_maxy)
@@ -1411,10 +1413,12 @@ $("#cari_lokal_layer").on('input', function() {
                 } catch (error) {
                     // checked = false;
                 }
-                if (checked[j]) {
-                    item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
-                } else {
-                    item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box_outline_blank</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                if (raw_local_wms[k].layer_advertised) {
+                    if (checked[j]) {
+                        item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                    } else {
+                        item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box_outline_blank</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                    }
                 }
                 // $('#layers_item_list').append(item_html);
                 // }
@@ -1431,10 +1435,12 @@ $("#cari_lokal_layer").on('input', function() {
                 } catch (error) {
                     // checked = false;
                 }
-                if (checked[j]) {
-                    item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
-                } else {
-                    item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box_outline_blank</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                if (raw_local_wms[k].layer_advertised) {
+                    if (checked[j]) {
+                        item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                    } else {
+                        item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box_outline_blank</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                    }
                 }
                 // $('#layers_item_list').append(item_html);
                 // }
@@ -1454,10 +1460,12 @@ $("#cari_lokal_layer").on('input', function() {
                 } catch (error) {
                     // checked = false;
                 }
-                if (checked[j]) {
-                    item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
-                } else {
-                    item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box_outline_blank</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                if (raw_local_wms[k].layer_advertised) {
+                    if (checked[j]) {
+                        item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                    } else {
+                        item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box_outline_blank</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                    }
                 }
                 // $('#layers_item_list').append(item_html);
                 // }
@@ -1474,10 +1482,12 @@ $("#cari_lokal_layer").on('input', function() {
                 } catch (error) {
                     // checked = false;
                 }
-                if (checked[j]) {
-                    item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
-                } else {
-                    item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box_outline_blank</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                if (raw_local_wms[k].layer_advertised) {
+                    if (checked[j]) {
+                        item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                    } else {
+                        item_html = "<li id='" + raw_local_wms[k].layer_nativename + "' class='collection-item'><i id='add_check' class='material-icons'>check_box_outline_blank</i> <span class='layermark' id='" + raw_local_wms[k].layer_nativename + "'>" + raw_local_wms[k].workspace + " " + raw_local_wms[k].layer_name + "</span></li>";
+                    }
                 }
                 // $('#layers_item_list').append(item_html);
                 // }
