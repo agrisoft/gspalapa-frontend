@@ -7,8 +7,8 @@
 
 .proerty-th .proerty-item .item-thumb {
     position: relative;
-    max-height: 275px;
-    min-height: 275px;
+    max-height: 250px;
+    min-height: 250px;
     display: inline-block;
     height: 100%;
     vertical-align: middle;
@@ -18,14 +18,11 @@
     transition: all 0.2s linear 0s;
     display: block;
     position: relative;
-    /* top: 50%; */
     width: 100%;
     opacity: 0.7;
-    /* min-height: 225px; */
-    height: auto;
-    /* max-height: 265px; */
+    min-height: auto !important;
+    min-width: auto !important;
     padding: 15px;
-    vertical-align: middle;
 }
 
 .count-area .count-item-circle {

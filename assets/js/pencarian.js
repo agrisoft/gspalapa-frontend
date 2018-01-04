@@ -21,6 +21,10 @@ $('document').ready(function() {
     }, 2000);
 
 });
+
+
+
+
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
@@ -180,28 +184,53 @@ jQuery.ajax({
         for (i = 0; i < listdata.length; i++) {
             //console.log(listdata[i]);
 
-            str = "";
+            // str = "";
+            // array = [];
+            // image2 = "";
+
+            // //pengambilan id csw
+            // str = listdata[i]['identifier'];
+
+
+
+            // array[0] = str.split(":");
+            // str2 = "";
+            // str3 = "";
+
+            // str2 = listdata[i]['links'];
+            // image2 = str2.split('^')[1].split(',')[3].split('?')[0];
+            // image2 = image2 + '/reflect?format=image/png&layers=' + listdata[i]['identifier']
+
+
+            // download = "";
+            // str3 = listdata[i]['links'];
+            // download = str3.split('^')[0].split(',')[3];
+            // download = download + 'service=WFS&version=1.0.0&request=GetFeature&typeName=' + listdata[i]['identifier'] + '&outputFormat=shape-zip';
+
             array = [];
-            image2 = "";
             str = listdata[i]['identifier'];
             array[0] = str.split(":");
-            str2 = "";
-            str3 = "";
-
             str2 = listdata[i]['links'];
             image2 = str2.split('^')[1].split(',')[3].split('?')[0];
             image2 = image2 + '/reflect?format=image/png&layers=' + listdata[i]['identifier']
-
-
-            download = "";
             str3 = listdata[i]['links'];
             download = str3.split('^')[0].split(',')[3];
-            download = download + 'service=WFS&version=1.0.0&request=GetFeature&typeName=' + listdata[i]['identifier'] + '&outputFormat=shape-zip';
+            download = download + '?service=WFS&version=1.0.0&request=GetFeature&typeName=' + listdata[i]['identifier'] + '&outputFormat=shape-zip';
+            // console.log(image2);
+            bboxbox = listdata[i].bbox.split(',');
+            //console.log(bboxbox)
+            minx = parseFloat(bboxbox[0].split(' ')[0].split('(')[1])
+            miny = parseFloat(bboxbox[0].split(' ')[1])
+            maxx = parseFloat(bboxbox[1].split(' ')[0].split(')')[0])
+            maxy = parseFloat(bboxbox[1].split(' ')[1].split(')')[0])
+            extent = [minx, miny, maxx, maxy]
 
             // console.log(image2);
-            //    console.log(download);
+            console.log(download);
 
-            $('#list-type').append(' <div class="list-item"> <div class="col-sm-6 col-md-4 p0"><div class="box-two proerty-item"><div class="item-thumb"><a href="#"><img src="' + image2 + '"</a></div><div class="item-entry overflow"><h5><a href="" class="title">' + listdata[i]['title'] + ' </a></h5><div class="dot-hr"></div><span class="pull-left"><b class="' + listdata[i]['keywords'] + '">' + listdata[i]['keywords'] + '</b></span><span class="pull-right"><i class="fa fa-map-marker cursor_pointer" style="font-size:20px" title="Lihat peta" data-toggle="modal" data-target="#viewPeta">&nbsp;</i><i class="fa fa-info-circle cursor_pointer" style="font-size:20px" title="Lihat metadata" data-toggle="modal" data-target="#metaData">&nbsp;</i><i class="fa fa-cloud-download cursor_pointer" style="font-size:20px" title="Download" data-toggle="modal" data-target="#downloadModal">&nbsp;</i></span><p style="display: none;">' + listdata[i]['abstract'] + '</p><div class="property-icon"><b class="' + array[0][0] + '">' + array[0][0] + '</b></div></div></div></div> ');
+            $('#list-type').append('<div class="col-sm-6 col-md-4 p0"><div class="box-two proerty-item"><div class="item-thumb"><a><img src="' + image2 + '"</a></div><div class="item-entry overflow"><div id="ltitle"><a href="">' + listdata[i]['title'] + ' </a></div><div class="dot-hr"></div><span class="pull-left"><b>' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><i id="' + listdata[i]['identifier'] + '" class="material-icons preview" title="Lihat peta"><span id="lihatpeta" class="cursor_pointer">location_on</span><div style="display:none"><div id="ident">' + listdata[i]['identifier'] + '</div><div id="minx">' + minx + '</div><div id="miny">' + miny + '</div><div id="maxx">' + maxx + '</div><div id="maxy">' + maxy + '</div></div></i><i id="' + listdata[i]['identifier'] + '" class="material-icons" title="Lihat metadata" data-toggle="modal" data-target="#metaData"><span class="cursor_pointer">info </span></i><i class="material-icons" title="Download"><span class="cursor_pointer"  id="linkdonwload">cloud_download</span><div id="linkurl" style="display:none;">' + download + '</div></i></span><div class="property-icon"><b>' + array[0][0] + '</b></div></div></div>');
+
+            // $('#list-type').append(' <div class="list-item"> <div class="col-sm-6 col-md-4 p0"><div class="box-two proerty-item"><div class="item-thumb"><a href="#"><img src="' + image2 + '"</a></div><div class="item-entry overflow"><h5><a href="" class="title">' + listdata[i]['title'] + ' </a></h5><div class="dot-hr"></div><span class="pull-left"><b class="' + listdata[i]['keywords'] + '">' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><img src="assets/img/maps_look.png" width="20px" height="20px" title="Lihat peta" data-toggle="modal" data-target="#viewPeta" class="cursor_pointer"><img src="assets/img/metadata.png"  id="' + listdata[i]['identifier'] + '" width="20px" height="20px" title="Lihat metadata" data-toggle="modal" data-target="#metaData" class="cursor_pointer"><img src="assets/img/download.png" width="20px" height="20px" title="Download" data-toggle="modal" data-target="#downloadModal" class="cursor_pointer"></span><p style="display: none;">' + listdata[i]['abstract'] + '</p><div class="property-icon"><b class="' + array[0][0] + '">' + array[0][0] + '</b></div></div></div></div> ');
         }
     },
     async: false
@@ -317,6 +346,16 @@ if (bxp === undefined) {
 
 $(document).ready(function() {
 
+
+    $(document).on('click', '.proerty-price.pull-right img', function() {
+
+        m_id = $(this).attr('id');
+
+        open_metadata(m_id);
+
+
+    });
+
     console.log('halo2', extent2);
 
     // Compute the current extent of the view given the map size
@@ -332,6 +371,36 @@ $(document).ready(function() {
     extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:4326", "EPSG:3857"));
 
     map.getView().fit(extent, map.getSize());
+
+    $(document).on('click', '.proerty-price.pull-right i', function() {
+        console.log($(this).find('#lihatpeta').text(), $(this).find('#linkdonwload').text());
+        if ($(this).find('#lihatpeta').text() == 'location_on') {
+            // console.log($(this).find('#lihatpeta').text());
+            p_id = $(this).attr('id');
+            console.log(p_id)
+            minx = parseFloat($(this).find('#minx').text())
+            miny = parseFloat($(this).find('#miny').text())
+            maxx = parseFloat($(this).find('#maxx').text())
+            maxy = parseFloat($(this).find('#maxy').text())
+            window.extent = $(this).find('#minx').text() + ',' + $(this).find('#miny').text() + ',' + $(this).find('#maxx').text() + ',' + $(this).find('#maxy').text()
+            try {
+                prevmap.removeLayer(preview);
+            } catch (error) {
+
+            }
+            add_prev_layer(p_id, minx, miny, maxx, maxy);
+            $("#viewPeta").modal('show');
+        } else if ($(this).find('#linkdonwload').text() == 'cloud_download') {
+            console.log($(this).find('#linkurl').text());
+            window.open($(this).find('#linkurl').text(), '_blank');
+        } else {
+            //pemanggilan metadata lengkap
+            m_id = $(this).attr('id');
+            open_metadata(m_id);
+            //pemanggilan metadata lengkap
+        }
+    });
+
 });
 
 map.getView().on('propertychange', function(e) {
@@ -355,3 +424,69 @@ function search() {
     console.log('search');
     event.preventDefault();
 }
+
+function metadataFull() {
+
+    if ($("#metadata1").css('display') !== 'none') {
+        $("#metadata1").hide();
+        $("#metadata2").show();
+        $("#modelmeta").css("height", "93% !important");
+        $("#thebutton").text("Metadata").button("refresh");
+    } else {
+        $("#metadata2").hide();
+        $("#metadata1").show();
+        $("#modelmeta").css("height", "auto");
+        $("#thebutton").text("Metadata Lengkap").button("refresh");
+
+    }
+}
+
+var preview, prevmap, searchmap;
+
+function add_prev_layer(layername, minx, miny, maxx, maxy) {
+    window.preview = new ol.layer.Tile({
+        visible: true,
+        extent: [minx, miny, maxx, maxy],
+        source: new ol.source.TileWMS({
+            url: _wmsURL,
+            params: {
+                'LAYERS': layername,
+                'TILED': true
+            }
+        })
+    });
+}
+
+function i_prev_map() {
+    var osm = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+
+    window.prevmap = new ol.Map({
+        layers: [osm],
+        target: 'i_prev_map',
+        view: new ol.View({
+            projection: 'EPSG:4326',
+            center: [0, 0],
+            zoom: 2
+        })
+    });
+}
+
+$("#viewPeta").on('shown.bs.modal', function() {
+    if ($("#i_prev_map").text() == '') {
+        p_id = $("#viewPeta").find('i');
+        i_prev_map();
+        extent = preview.getExtent();
+        prevmap.addLayer(preview);
+        prevmap.getView().fit(extent, prevmap.getSize());
+    } else {
+        extent = preview.getExtent();
+        prevmap.addLayer(preview);
+        prevmap.getView().fit(extent, prevmap.getSize());
+    }
+});
+
+$("#viewPeta").on('hide.bs.modal', function() {
+    //
+});

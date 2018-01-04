@@ -10,6 +10,7 @@ var map_div = "jelajah_map";
 var layer = [];
 var raw_local_wms;
 var raw_out_wms;
+var raw_out_wms_url;
 var ext_srv;
 var basemaps;
 var basemap = [];
@@ -38,6 +39,8 @@ var box_ukur_visible = false;
 var start_measure = false;
 var listgeocoding = false;
 var cari_val;
+var exturl_val, exturl_type;
+var simpul_val, simpul_type, simpul_text;
 
 // Functions
 function getSimpulInfo() {
@@ -887,8 +890,12 @@ var leftsidebar = "<div class='leftsidebar'><span class='daftarlayer'>Daftar Lay
 var layerwindow = "<div id='layerwindow'><div id='layerwindowheader'>Tambah Layer <i class='material-icons layerwindowclose right'>close</i></div><div id='layerwindowcontent'><ul class='tabs' id='addlayerstab'><li class='tab col s3'><a class='active'  href='#locallayer'>Dataset</a></li><li class='tab col s3'><a href='#simpul'>Simpul</a></li><li class='tab col s3'><a href='#localfiles'>File</a></li><li class='tab col s3'><a href='#extlayer'>URL</a></li></ul><div id='tabsubheader'></div><div class='col s12 grey lighten-4 addlayercontentpad' id='locallayer'></div><div class='col s12 grey lighten-4 addlayercontentpad' id='extlayer'><ul class='collection' id='wms_item_list'></ul></div><div class='col s12 grey lighten-4 addlayercontentpad' id='localfiles'><div id='dropzone'></div></div><div class='col s12 white addlayercontentpad' id='simpul'><div class='col s2' id='ext_srv_t'></div><div class='col s2' id='ext_srv_url' style='display:none;'></div><div class='col s12'><ul class='collection' id='ext_wms_item_list'></ul></div></div></div></div>";
 var layerwindow_lokal = "<ul class='collapsible' data-collapsible='expandable' id='layerwindow_lokal'></ul>";
 var tablayerlokal = "<div class='input-field col s12 textinputnolab'><input placeholder='Cari layer ...' id='layername_lokal' type='text' class='validate tabsub' style='margin:0px;'/></div>";
-var tablayersimpul = "<div class='input-field col s12 textinputnolab'><select id='ext_srv_type'><option disable='' selected='selected' value='WMS'>Pilih Servis</option></select></div>";
-var tablayerurl = "<div class='input-field col s12 textinputnolab' style='padding: 0px;'><div class='row' style='margin-left:0px; margin-right:0px;'><div class='col s12 taburl'><div class='row' style='margin-bottom: 0px !important; margin-left:0px; margin-right:0px;'><div class='input-field col s12 textinputnolab' style='padding: 0px;'><input class='validate' style='margin-bottom: 0px;' id='url_servis' placeholder='URL servis' type='text'/></div></div></div></div><div class='row' style='margin-left:0px; margin-right:0px;'><div class='input-field col s8 textinputnolab'><select id='srv_type'><option disable='' selected='selected' value='WMS'>OGC WMS</option><option value='ESRI'>ESRI REST</option></select></div><div class='col s4 textinputnolab'><a class='waves-effect waves-light btn' id='getwmslist'>Ambil List</a></div></div></div>";
+var tablayersimpul = "<div class='input-field col s12 textinputnolab'><select id='ext_srv_type' name='ext_srv_type'><option disable='' selected='selected' value='WMS'>Pilih Servis</option></select></div>";
+if (embedded) {
+    var tablayerurl = "<div class='input-field col s12 textinputnolab' style='padding: 0px;'><div class='row' style='margin-left:15px;margin-right:15px'><div class='col s12 taburl'><div class='row' style='margin-bottom: 0px !important;'><div class='input-field col s12 textinputnolab' style='padding: 0px;'><input class='validate' style='margin-bottom: 0px;' id='url_servis' placeholder='URL servis' type='text'/></div></div></div></div><div class='row' style='margin-left:15px;margin-right:15px;'><div class='input-field col s8 textinputnolab'><select id='srv_type'><option disable='' selected='selected' value='WMS'>OGC WMS</option><option value='ESRI'>ESRI REST</option></select></div><div class='col s4 textinputnolab'><a class='waves-effect waves-light btn' id='getwmslist'>Ambil List</a></div></div></div>";
+} else {
+    var tablayerurl = "<div class='input-field col s12 textinputnolab' style='padding: 0px;'><div class='row'><div class='col s12 taburl'><div class='row' style='margin-bottom: 0px !important;'><div class='input-field col s12 textinputnolab' style='padding: 0px;'><input class='validate' style='margin-bottom: 0px;' id='url_servis' placeholder='URL servis' type='text'/></div></div></div></div><div class='row'><div class='input-field col s8 textinputnolab'><select id='srv_type'><option disable='' selected='selected' value='WMS'>OGC WMS</option><option value='ESRI'>ESRI REST</option></select></div><div class='col s4 textinputnolab'><a class='waves-effect waves-light btn' id='getwmslist'>Ambil List</a></div></div></div>";
+}
 var box_ukur = "<div id='box_ukur'><div class='input-field'><select id='select_ukur'><option value='' disabled selected>Pilih pengukuran</option><option value='1'>Panjang</option><option value='2'>Luas</option></select><label>Geometri</label></div><div id='panjang' class='input-field' style='display:none;'><select id='satuan_panjang'><option value=0 disabled selected>Satuan</option><option value=1>Meter (m)</option><option value=2>Kilometer (km)</option><option value=3>Mil</option></select><label>Satuan</label></div><div id='luas' class='input-field' style='display:none;'><select id='satuan_luas'><option value=0 disabled selected>Satuan</option><option value=4>Meter Persegi (m2)</option><option value=5>Kilometer Persegi (km2)</option><option value=6>Mil Persegi</option></select><label>Satuan</label></div></div>";
 
 $("#jelajah").append(basemapbox);
@@ -950,6 +957,12 @@ function layertabswitch(tab) {
             $('#ext_srv_type').append(item_html);
             extChanged();
         }
+        if (simpul_val) {
+            console.log(simpul_type, simpul_val, simpul_text);
+            $("#ext_srv_type").val(simpul_val);
+            // $("#srv_type").val(simpul_type);
+            // $("[name=ext_srv_type]").text(simpul_text);
+        }
         $('select').material_select();
     }
     if (tab == 'URL') {
@@ -957,6 +970,11 @@ function layertabswitch(tab) {
         $("#tabsubheader").empty();
         $("#tabsubheader").append(tablayerurl);
         getwmslist();
+        if (exturl_val) {
+            console.log(exturl_type, exturl_val);
+            $("#url_servis").val(exturl_val);
+            $("#srv_type").val(exturl_type);
+        }
         $('select').material_select();
     }
     if (tab == 'File') {
@@ -1292,6 +1310,8 @@ function getwmslist() {
     $('#getwmslist').on('click', function() {
         srv_type = $('#srv_type').val();
         srv_url = $('#url_servis').val();
+        window.exturl_val = srv_url;
+        window.exturl_type = srv_type;
         console.log('CLICKED', srv_type, srv_url);
         if (srv_type == 'WMS') {
             function getWMSdata() {
@@ -1303,7 +1323,7 @@ function getwmslist() {
                         wmscap = new WMSCapabilities().parse(wmscapobj);
                         console.log(wmscap)
                         wmslayerlist = wmscap.Capability.Layer.Layer;
-                        window.raw_out_wms = wmslayerlist;
+                        window.raw_out_wms_url = wmslayerlist;
                         console.log(wmslayerlist)
                         $('#wms_item_list').empty();
                         for (i = 0; i < wmslayerlist.length; i++) {
@@ -1346,23 +1366,23 @@ $('#wms_item_list').on('click', function(e) {
             p_id = $(e.target).closest('li').attr('id');
         }
         var min_x, min_y, max_x, max_y, layer_nativename;
-        for (i = 0; i < raw_out_wms.length; i++) {
+        for (i = 0; i < raw_out_wms_url.length; i++) {
             // console.log(raw_local_wms[i].layer_nativename)
             try {
-                if (raw_out_wms[i].Name.indexOf(p_id) >= 0) {
-                    min_x = raw_out_wms[i].EX_GeographicBoundingBox[0];
-                    min_y = raw_out_wms[i].EX_GeographicBoundingBox[1];
-                    max_x = raw_out_wms[i].EX_GeographicBoundingBox[2];
-                    max_y = raw_out_wms[i].EX_GeographicBoundingBox[3];
-                    layer_nativename = raw_out_wms[i].Name;
+                if (raw_out_wms_url[i].Name.indexOf(p_id) >= 0) {
+                    min_x = raw_out_wms_url[i].EX_GeographicBoundingBox[0];
+                    min_y = raw_out_wms_url[i].EX_GeographicBoundingBox[1];
+                    max_x = raw_out_wms_url[i].EX_GeographicBoundingBox[2];
+                    max_y = raw_out_wms_url[i].EX_GeographicBoundingBox[3];
+                    layer_nativename = raw_out_wms_url[i].Name;
                 }
             } catch (error) {
                 // if (raw_out_wms[i].Title.indexOf(p_id) >= 0) {
-                min_x = raw_out_wms[i].EX_GeographicBoundingBox[0];
-                min_y = raw_out_wms[i].EX_GeographicBoundingBox[1];
-                max_x = raw_out_wms[i].EX_GeographicBoundingBox[2];
-                max_y = raw_out_wms[i].EX_GeographicBoundingBox[3];
-                layer_nativename = raw_out_wms[i].Title;
+                min_x = raw_out_wms_url[i].EX_GeographicBoundingBox[0];
+                min_y = raw_out_wms_url[i].EX_GeographicBoundingBox[1];
+                max_x = raw_out_wms_url[i].EX_GeographicBoundingBox[2];
+                max_y = raw_out_wms_url[i].EX_GeographicBoundingBox[3];
+                layer_nativename = raw_out_wms_url[i].Title;
                 // }    
             }
         }
@@ -1399,6 +1419,9 @@ function extChanged() {
             if (ext_srv[i].url == $("#ext_srv_type").val()) {
                 if (ext_srv[i].type == 'OGC WMS') { tipe = 'WMS' } else { tipe = 'ESRI' };
                 $("#ext_srv_t").text(ext_srv[i].type);
+                window.simpul_val = $("#ext_srv_type").val();
+                window.simpul_type = tipe;
+                window.simpul_text = ext_srv[i].name;
                 if (tipe == 'WMS') {
                     function getWMSdata() {
                         wmscapurl = ext_srv[i].url + '?service=wms&request=GetCapabilities';
@@ -1410,7 +1433,6 @@ function extChanged() {
                                 wmslayerlist = wmscap.Capability.Layer.Layer;
                                 window.raw_out_wms = wmslayerlist;
                                 console.log(wmslayerlist)
-                                $('#wms_item_list').empty();
                                 for (i = 0; i < wmslayerlist.length; i++) {
                                     item_html = "<li id='" + wmslayerlist[i].Name + "' class='collection-item'><i id='add_check' class='material-icons ilist2'>add_circle</i> <span class='layermark lilist2' id='" + wmslayerlist[i].Name + "'>" + wmslayerlist[i].Title + "</span></li>";
                                     $('#ext_wms_item_list').append(item_html);

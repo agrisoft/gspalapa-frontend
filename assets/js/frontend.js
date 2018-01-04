@@ -32,9 +32,9 @@ var layer = [];
 
 
 $.get(_api + "listmetalayer", function(data) {
-    listdata = (data);
+    listdata = data;
     for (i = 0; i < 4; i++) {
-        console.log(listdata[i]);
+        console.log(listdata[i], listdata[i]['identifier']);
 
         array = [];
         str = listdata[i]['identifier'];
@@ -54,7 +54,7 @@ $.get(_api + "listmetalayer", function(data) {
         maxy = parseFloat(bboxbox[1].split(' ')[1].split(')')[0])
         extent = [minx, miny, maxx, maxy]
             //console.log(extent)
-        $('#list-type').append('<div class="col-sm-6 col-md-3 p0"><div class="box-two proerty-item"><div class="item-thumb"><a><img src="' + image2 + '"</a></div><div class="item-entry overflow"><div id="ltitle"><a href="">' + listdata[i]['title'] + ' </a></div><div class="dot-hr"></div><span class="pull-left"><b>' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><i id="' + listdata[i]['identifier'] + '" class="material-icons preview" title="Lihat peta"><span class="cursor_pointer">location_on </span><div style="display:none"><div id="ident">' + listdata[i]['identifier'] + '</div><div id="minx">' + minx + '</div><div id="miny">' + miny + '</div><div id="maxx">' + maxx + '</div><div id="maxy">' + maxy + '</div></div></i><i class="material-icons" title="Lihat metadata" data-toggle="modal" data-target="#metaData"><span class="cursor_pointer">info </span></i><i class="material-icons" title="Download" data-toggle="modal" data-target="#downloadModal"><span class="cursor_pointer"> cloud_download</span></i></span><div class="property-icon"><b>' + array[0][0] + '</b></div></div></div>');
+        $('#list-type').append('<div class="col-sm-6 col-md-3 p0"><div class="box-two proerty-item"><div class="item-thumb"><a><img src="' + image2 + '"</a></div><div class="item-entry overflow"><div id="ltitle"><a href="">' + listdata[i]['title'] + ' </a></div><div class="dot-hr"></div><span class="pull-left"><b>' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><i id="' + listdata[i]['identifier'] + '" class="material-icons preview" title="Lihat peta"><span id="lihatpeta" class="cursor_pointer">location_on</span><div style="display:none"><div id="ident">' + listdata[i]['identifier'] + '</div><div id="minx">' + minx + '</div><div id="miny">' + miny + '</div><div id="maxx">' + maxx + '</div><div id="maxy">' + maxy + '</div></div></i><i id="' + listdata[i]['identifier'] + '" class="material-icons" title="Lihat metadata" data-toggle="modal" data-target="#metaData"><span class="cursor_pointer">info </span></i><i class="material-icons" title="Download"><span class="cursor_pointer"  id="linkdonwload">cloud_download</span><div id="linkurl" style="display:none;">' + download + '</div></i></span><div class="property-icon"><b>' + array[0][0] + '</b></div></div></div>');
     }
 });
 
@@ -73,24 +73,37 @@ $("#burgermenu").on('click', function() {
 })
 
 var extent;
+var linkdownload;
 
 $(document).ready(function() {
 
         $(document).on('click', '.proerty-price.pull-right i', function() {
-            console.log($(this).find('#minx').text());
-            p_id = $(this).attr('id');
-            minx = parseFloat($(this).find('#minx').text())
-            miny = parseFloat($(this).find('#miny').text())
-            maxx = parseFloat($(this).find('#maxx').text())
-            maxy = parseFloat($(this).find('#maxy').text())
-            window.extent = $(this).find('#minx').text() + ',' + $(this).find('#miny').text() + ',' + $(this).find('#maxx').text() + ',' + $(this).find('#maxy').text()
-            try {
-                prevmap.removeLayer(preview);
-            } catch (error) {
+            console.log($(this).find('#lihatpeta').text(), $(this).find('#linkdonwload').text());
+            if ($(this).find('#lihatpeta').text() == 'location_on') {
+                // console.log($(this).find('#lihatpeta').text());
+                p_id = $(this).attr('id');
+                console.log(p_id)
+                minx = parseFloat($(this).find('#minx').text())
+                miny = parseFloat($(this).find('#miny').text())
+                maxx = parseFloat($(this).find('#maxx').text())
+                maxy = parseFloat($(this).find('#maxy').text())
+                window.extent = $(this).find('#minx').text() + ',' + $(this).find('#miny').text() + ',' + $(this).find('#maxx').text() + ',' + $(this).find('#maxy').text()
+                try {
+                    prevmap.removeLayer(preview);
+                } catch (error) {
 
+                }
+                add_prev_layer(p_id, minx, miny, maxx, maxy);
+                $("#viewPeta").modal('show');
+            } else if ($(this).find('#linkdonwload').text() == 'cloud_download') {
+                console.log($(this).find('#linkurl').text());
+                window.open($(this).find('#linkurl').text(), '_blank');
+            } else {
+                //pemanggilan metadata lengkap
+                m_id = $(this).attr('id');
+                open_metadata(m_id);
+                //pemanggilan metadata lengkap
             }
-            add_prev_layer(p_id, minx, miny, maxx, maxy);
-            $("#viewPeta").modal('show');
         });
 
         i_search_map();
@@ -109,7 +122,6 @@ $.get(_api + "sisteminfo", function(data) {
     $('#title-pencarian').text('Pencarian Data :: Geoportal ' + data['organization']);
     $('#title-kontak').text('Kontak Kami :: Geoportal ' + data['organization']);
     $('#title-login').text('Login :: Geoportal ' + data['organization']);
-    $('#title-berita').text('Berita :: Geoportal ' + data['organization']);
 
     $('#organisasi').text(data['organization']);
     $('#organisasi-body').text(data['organization']);
@@ -165,7 +177,7 @@ $.ajax({
             item_html = "<div><a target='_blank' href='" + items[i].url + "'><img data-u='image' src='data:image/jpeg;base64," + items[i].image + "' alt='" + items[i].nama + "'/></a></div>";
             $("#linkweb").append(item_html);
         }
-        jssor_1_slider_init();
+        // jssor_1_slider_init();
     }
 })
 
@@ -286,3 +298,20 @@ $("#searchbtn").submit(function() {
     $("#bbox").val(window.bbox)
     alert(window.bbox)
 })
+
+
+function metadataFull() {
+
+    if ($("#metadata1").css('display') !== 'none') {
+        $("#metadata1").hide();
+        $("#metadata2").show();
+        $("#modelmeta").css("height", "93% !important");
+        $("#thebutton").text("Metadata").button("refresh");
+    } else {
+        $("#metadata2").hide();
+        $("#metadata1").show();
+        $("#modelmeta").css("height", "auto");
+        $("#thebutton").text("Metadata Lengkap").button("refresh");
+
+    }
+}
