@@ -41,6 +41,7 @@ var listgeocoding = false;
 var cari_val;
 var exturl_val, exturl_type;
 var simpul_val, simpul_type, simpul_text;
+var photos;
 
 // Functions
 function getSimpulInfo() {
@@ -221,6 +222,24 @@ function layerOpa(layerid, opacity) {
     opafrac = opacity / 100;
     layer[layerid].setOpacity(opafrac);
 };
+
+function wrapLon(value) {
+    var worlds = Math.floor((value + 180) / 360);
+    return value - (worlds * 360);
+}
+
+function onMoveEnd(evt) {
+    var map = evt.map;
+    var extent = map.getView().calculateExtent(map.getSize());
+    var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
+        'EPSG:3857', 'EPSG:4326');
+    var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
+        'EPSG:3857', 'EPSG:4326');
+    console.log('left', wrapLon(bottomLeft[0]), 'bottom', bottomLeft[1], wrapLon(topRight[0]), topRight[1]);
+    if (photosmodal_stat) {
+        getPhotos(wrapLon(bottomLeft[0]), bottomLeft[1], wrapLon(topRight[0]), topRight[1]);
+    }
+}
 
 function handleFileSelect(evt) {
     console.log(evt)
@@ -663,6 +682,62 @@ function getBasemaps() {
     })
 }
 
+function getPhotos(minx, miny, maxx, maxy) {
+    $(".photosmodal").empty();
+    $.ajax({
+        url: palapa_api_url + "photos/query?minx=" + minx + "&miny=" + miny + "&maxx=" + maxx + "&maxy=" + maxy,
+        async: true,
+        success: function(data) {
+            console.log(data);
+            photosSource.clear();
+            for (i = 0; i < data.length; i++) {
+                var feature = new ol.Feature(data[i]);
+                feature.set('nama', data[i].nama);
+                var coordinate = [parseFloat(data[i].lon), parseFloat(data[i].lat)];
+                var geometry = new ol.geom.Point(ol.proj.fromLonLat(coordinate, 'EPSG:3857'));
+                feature.setGeometry(geometry);
+                photosSource.addFeature(feature);
+                photos_html = "<div id='photo_" + data[i].id + "'><div class='card photoscard'><div class='card-image'><img style='height:85px; width: auto;' src='data:image/jpeg;base64," + data[i].photo + "'/><span id='photo_" + data[i].id + "' class='card-title basemap'>" + data[i].nama + "</span></div></div></div></div>";
+                $(".photosmodal").append(photos_html);
+            }
+        }
+    })
+}
+
+function getPhotobyid(photoid) {
+    $.ajax({
+        url: palapa_api_url + "photos/id?id=" + photoid,
+        async: true,
+        success: function(data) {
+            console.log(data);
+            var coordinate = [parseFloat(data[0].lon), parseFloat(data[0].lat)];
+            console.log(ol.proj.fromLonLat(coordinate, 'EPSG:3857'));
+            var merc_coordinate = ol.proj.fromLonLat(coordinate, 'EPSG:3857');
+            var geometry = new ol.geom.Point(ol.proj.fromLonLat(coordinate, 'EPSG:3857'));
+            $('#popup-content').empty();
+            var tabel_info_head = "<table class='highlight'><thead><tr><th>Key</th><th>Value</th></tr></thead><tbody id='isiinfo'></tbody></table>";
+            $('#popup-content').append(tabel_info_head)
+            $.each(data[0], function(k, v) {
+                if (k != 'geometry') {
+                    if (photosmodal_stat) {
+                        if (k == 'photo') {
+                            content_html = "<tr><td>" + data[0].nama + "</td><td><img style='width: 250px;' src='data:image/jpeg;base64," + data[0].photo + "'/></td></tr>";
+                        } else {
+                            content_html = "<tr><td>" + k + "</td><td>" + v + "</td></tr>";
+                        }
+                    } else {
+                        content_html = "<tr><td>" + k + "</td><td>" + v + "</td></tr>";
+                    }
+                    $('#isiinfo').append(content_html)
+                }
+            });
+            $('#popup-content').append(content_html)
+            overlay.setPosition(merc_coordinate);
+        }
+    })
+}
+
+
 // Custom control
 
 // Init map
@@ -738,7 +813,25 @@ var draw_vector = new ol.layer.Vector({
     zIndex: 666666
 });
 
-var default_layers = [layer_osm, layer_rbi, layer_esri, layer_rbibaru, draw_vector];
+var photosSource = new ol.source.Vector();
+var photosstyle = new ol.style.Style({
+    image: new ol.style.Circle({
+        radius: 6,
+        stroke: new ol.style.Stroke({
+            color: 'white',
+            width: 2
+        }),
+        fill: new ol.style.Fill({
+            color: 'green'
+        })
+    })
+});
+var photoslayer = new ol.layer.Vector({
+    source: photosSource,
+    style: photosstyle
+});
+
+var default_layers = [layer_osm, layer_rbi, layer_esri, layer_rbibaru, draw_vector, photoslayer];
 
 closer.onclick = function() {
     overlay.setPosition(undefined);
@@ -771,6 +864,8 @@ var map = new ol.Map({
 });
 
 map.getView().fit(merc_extent, map.getSize());
+
+map.on('moveend', onMoveEnd);
 
 map.on('singleclick', function(evt) {
     var coordinate = evt.coordinate;
@@ -823,7 +918,15 @@ map.on('singleclick', function(evt) {
                 if (fkeys[i] != 'geometry') {
                     // content_html = "<p>" + fkeys[i] + ": " + feature.get(fkeys[i]) + "</p>";
                     // $('#popup-content').append(content_html)
-                    content_html = "<tr><td>" + fkeys[i] + "</td><td>" + feature.get(fkeys[i]) + "</td></tr>";
+                    if (photosmodal_stat) {
+                        if (fkeys[i] == 'photo') {
+                            content_html = "<tr><td>" + fkeys[i] + "</td><td><img style='width: 250px;' src='data:image/jpeg;base64," + feature.get(fkeys[i]) + "'/></td></tr>";
+                        } else {
+                            content_html = "<tr><td>" + fkeys[i] + "</td><td>" + feature.get(fkeys[i]) + "</td></tr>";
+                        }
+                    } else {
+                        content_html = "<tr><td>" + fkeys[i] + "</td><td>" + feature.get(fkeys[i]) + "</td></tr>";
+                    }
                     $('#isiinfo').append(content_html)
                 }
             }
@@ -878,7 +981,7 @@ function getInfo(evt, layer) {
 
 // Init UI Controls
 
-var basemapbox = "<div class='basemapbox'><span class='basemapbtn'><i class='material-icons lrbox'>perm_media</i> Basemap</span><span class='photos' style='display:none;'><i class='material-icons lrbox'>photo_camera</i> Foto</span></div>";
+var basemapbox = "<div class='basemapbox'><span class='basemapbtn'><i class='material-icons lrbox'>perm_media</i> Basemap</span><span class='photos'><i class='material-icons lrbox'>photo_camera</i> Foto</span></div>";
 var basemapmodal = "<div class='basemapmodal'><div id='base_osm'><div class='card basemapcard'><div class='card-image'><img src='images/osm.png'><span class='card-title basemap'>OSM</span></div></div></div><div id='base_rbi'><div class='card basemapcard'><div class='card-image'><img src='images/rbi.png'><span class='card-title basemap'>RBI</span></div></div></div><div id='base_esri'><div class='card basemapcard'><div class='card-image'><img src='images/esri_i.png'><span class='card-title basemap'>ESRI</span></div></div></div><div id='base_rbibaru'><div class='card basemapcard'><div class='card-image'><img src='images/rbios.png'><span class='card-title basemap'>RBI OS</span></div></div></div></div>";
 var photosmodal = "<div class='photosmodal'></div>";
 var cari_geocoding = "<div class='cari_geocoding'></div>";
@@ -991,7 +1094,10 @@ function basemapstoggle() {
         $(".basemapmodal").css('height', '100px');
         $(".photosmodal").css('height', '0px');
         basemapmodal_stat = true;
-        if (photosmodal_stat) { photosmodal_stat = false; }
+        if (photosmodal_stat) {
+            photosSource.clear();
+            photosmodal_stat = false;
+        }
     } else {
         $(".ol-zoom").css('bottom', '5em');
         $("#zoomextent").css('bottom', '150px');
@@ -1009,6 +1115,12 @@ function photostoggle() {
         $(".photosmodal").css('height', '100px');
         $(".basemapmodal").css('height', '0px');
         photosmodal_stat = true;
+        var extent = map.getView().calculateExtent(map.getSize());
+        var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
+            'EPSG:3857', 'EPSG:4326');
+        var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
+            'EPSG:3857', 'EPSG:4326');
+        getPhotos(wrapLon(bottomLeft[0]), bottomLeft[1], wrapLon(topRight[0]), topRight[1]);
         if (basemapmodal_stat) {
             basemapmodal_stat = false;
         }
@@ -1017,6 +1129,7 @@ function photostoggle() {
         $("#zoomextent").css('bottom', '150px');
         $(".basemapbox").css('bottom', '35px')
         $(".photosmodal").css('height', '0px');
+        photosSource.clear();
         photosmodal_stat = false;
     }
 }
@@ -1230,6 +1343,15 @@ $(".basemapmodal").on('click', function(e) {
     console.log($(e.target).siblings().text());
     switchbaselayer(base_id);
 })
+
+$(".photosmodal").on('click', function(e) {
+    base_id = $(e.target).siblings().attr('id');
+    console.log($(e.target).siblings().attr('id').split('_')[1]);
+    getPhotobyid(base_id.split('_')[1]);
+    // overlay.setPosition(coordinate);
+    // switchbaselayer(base_id);
+})
+
 
 function list_hasil_event() {
     $("#list_hasil").on('click', function(e) {
