@@ -228,7 +228,10 @@ jQuery.ajax({
             // console.log(image2);
             console.log(download);
 
-            $('#list-type').append('<div class="col-sm-6 col-md-4 p0"><div class="box-two proerty-item"><div class="item-thumb"><a><img src="' + image2 + '"</a></div><div class="item-entry overflow"><div id="ltitle"><a href="">' + listdata[i]['title'] + ' </a></div><div class="dot-hr"></div><span class="pull-left"><b>' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><i id="' + listdata[i]['identifier'] + '" class="material-icons preview" title="Lihat peta"><span id="lihatpeta" class="cursor_pointer">location_on</span><div style="display:none"><div id="ident">' + listdata[i]['identifier'] + '</div><div id="minx">' + minx + '</div><div id="miny">' + miny + '</div><div id="maxx">' + maxx + '</div><div id="maxy">' + maxy + '</div></div></i><i id="' + listdata[i]['identifier'] + '" class="material-icons" title="Lihat metadata" data-toggle="modal" data-target="#metaData"><span class="cursor_pointer">info </span></i><i class="material-icons" title="Download"><span class="cursor_pointer"  id="linkdonwload">cloud_download</span><div id="linkurl" style="display:none;">' + download + '</div></i></span><div class="property-icon"><b>' + array[0][0] + '</b></div></div></div>');
+
+            
+
+            $('#list-type').append('<div class="col-sm-6 col-md-4 p0"><div class="box-two proerty-item"><div class="item-thumb"><a><img src="' + image2 + '"</a></div><div class="item-entry overflow"><div id="ltitle"><a href="">' + listdata[i]['title'] + ' </a></div><div class="dot-hr"></div><span class="pull-left"><b>' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><i id="' + listdata[i]['identifier'] + '" class="material-icons preview" title="Lihat peta"><span id="lihatpeta" class="cursor_pointer">location_on</span><div style="display:none"><div id="ident">' + listdata[i]['identifier'] + '</div><div id="minx">' + minx + '</div><div id="miny">' + miny + '</div><div id="maxx">' + maxx + '</div><div id="maxy">' + maxy + '</div></div></i><i id="' + listdata[i]['identifier'] + '" class="material-icons" title="Lihat metadata" data-toggle="modal" data-target="#metaData"><span id="infopeta" class="cursor_pointer">info</span><div style="display:none"><div id="1ident">' + listdata[i]['identifier']  + '</div><div id="1wfs">' + listdata[i]['links'].split(',')[3].split('^')[0]  +'</div><div id="1wms">' + listdata[i]['links'].split(',')[6].split('^')[0]   +'</div><div id="1keywords">' + listdata[i]['keywords']  +'</div><div id="1abstract">' + listdata[i]['abstract']  + '</div><div id="1title">' + listdata[i]['title']  + '</div><div id="1type">' + listdata[i]['type']  +'</div><div id="1minx">' + minx + '</div><div id="1miny">' + miny + '</div><div id="1maxx">' + maxx + '</div><div id="1maxy">' + maxy + '</div></div></i><i class="material-icons" title="Download"><span class="cursor_pointer"  id="linkdonwload">cloud_download</span><div id="linkurl" style="display:none;">' + download + '</div></i></span><div class="property-icon"><b>' + array[0][0] + '</b></div></div></div>');
 
             // $('#list-type').append(' <div class="list-item"> <div class="col-sm-6 col-md-4 p0"><div class="box-two proerty-item"><div class="item-thumb"><a href="#"><img src="' + image2 + '"</a></div><div class="item-entry overflow"><h5><a href="" class="title">' + listdata[i]['title'] + ' </a></h5><div class="dot-hr"></div><span class="pull-left"><b class="' + listdata[i]['keywords'] + '">' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><img src="assets/img/maps_look.png" width="20px" height="20px" title="Lihat peta" data-toggle="modal" data-target="#viewPeta" class="cursor_pointer"><img src="assets/img/metadata.png"  id="' + listdata[i]['identifier'] + '" width="20px" height="20px" title="Lihat metadata" data-toggle="modal" data-target="#metaData" class="cursor_pointer"><img src="assets/img/download.png" width="20px" height="20px" title="Download" data-toggle="modal" data-target="#downloadModal" class="cursor_pointer"></span><p style="display: none;">' + listdata[i]['abstract'] + '</p><div class="property-icon"><b class="' + array[0][0] + '">' + array[0][0] + '</b></div></div></div></div> ');
         }
@@ -344,33 +347,31 @@ if (bxp === undefined) {
 }
 
 
+
+
+var extent;
+var linkdownload;
+
+
 $(document).ready(function() {
 
 
-    $(document).on('click', '.proerty-price.pull-right img', function() {
-
-        m_id = $(this).attr('id');
-
-        open_metadata(m_id);
-
-
-    });
-
+ 
     console.log('halo2', extent2);
 
     // Compute the current extent of the view given the map size
 
 
-    var minlon = parseInt(extent2[0]);
-    var minlat = parseInt(extent2[1]);
-    var maxlon = parseInt(extent2[2]);
-    var maxlat = parseInt(extent2[3]);
+    // var minlon = parseInt(extent2[0]);
+    // var minlat = parseInt(extent2[1]);
+    // var maxlon = parseInt(extent2[2]);
+    // var maxlat = parseInt(extent2[3]);
 
-    // Trasnform extent to EPSG:3857
-    var extent = [minlon, minlat, maxlon, maxlat];
-    extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:4326", "EPSG:3857"));
+    // // Trasnform extent to EPSG:3857
+    // var extent = [minlon, minlat, maxlon, maxlat];
+    // extent = ol.extent.applyTransform(extent, ol.proj.getTransform("EPSG:4326", "EPSG:3857"));
 
-    map.getView().fit(extent, map.getSize());
+    // map.getView().fit(extent, map.getSize());
 
     $(document).on('click', '.proerty-price.pull-right i', function() {
         console.log($(this).find('#lihatpeta').text(), $(this).find('#linkdonwload').text());
@@ -393,11 +394,42 @@ $(document).ready(function() {
         } else if ($(this).find('#linkdonwload').text() == 'cloud_download') {
             console.log($(this).find('#linkurl').text());
             window.open($(this).find('#linkurl').text(), '_blank');
-        } else {
+        } else if ($(this).find('#infopeta').text() == 'info') {
             //pemanggilan metadata lengkap
             m_id = $(this).attr('id');
             open_metadata(m_id);
-            //pemanggilan metadata lengkap
+            
+            console.log(m_id)
+
+
+             console.log($(this).find('#1title').text())
+
+        
+               
+
+                  minx = parseFloat($(this).find('#1minx').text())
+                  miny = parseFloat($(this).find('#1miny').text())
+                  maxx = parseFloat($(this).find('#1maxx').text())
+                  maxy = parseFloat($(this).find('#1maxy').text())
+
+                  //pemanggilan metadata   
+                   $('#type_title').val($(this).find('#1title').text())
+                   $('#type_subject').val($(this).find('#1keywords').text())  
+                   $('#type_dataset').val($(this).find('#1type').text()) 
+                   $('#type_abstract').val($(this).find('#1abstract').text())
+                   $('#type_identifier').val(m_id)
+
+                    $('#type_wms').val($(this).find('#1wms').text())
+                    $('#type_wfs').val($(this).find('#1wfs').text())
+
+                   $('#type_bbox').val("[ " + minx+", "+miny+", "+maxx+", "+maxy+" ]")
+
+          
+
+              
+             
+
+
         }
     });
 
