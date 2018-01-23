@@ -42,7 +42,7 @@ $.get(_api + "sisteminfo", function(data) {
     $('#phone').text('Telp: ' + data['phone']);
     $('#fax').text('Fax: ' + data['fax']);
     $('#fax-body').text('Fax: ' + data['fax']);
-    $('#footer-tentang-kami').text(data['deskripsi']);
+    $('#footer-tentang-kami').text(data['tentangkami']);
 
     $('#organisasi-logo').empty();
     $('#organisasi-logo').text('EOPORTAL ' + data['organization']);
@@ -50,11 +50,11 @@ $.get(_api + "sisteminfo", function(data) {
     $('#logosbawah').attr('src', data['logo']);
 
     $('#judul-slider-depan').text('Geoportal ' + data['organization']);
-    var ex = "";
-    for (e = 0; e < data['extent'].length; e++) {
-        console.log(data['extent'][e])
-        window.simpulextent.push(parseFloat(data['extent'][e]));
-    }
+    // var ex = "";
+    // for (e = 0; e < data['extent'].length; e++) {
+    //     console.log(data['extent'][e])
+    //     window.simpulextent.push(parseFloat(data['extent'][e]));
+    // }
 });
 
 function getParameterByName(name, url) {

@@ -171,7 +171,7 @@ $.get(_api + "sisteminfo", function(data) {
     $('#phone').text('Telp: ' + data['phone']);
     $('#fax').text('Fax: ' + data['fax']);
     $('#fax-body').text('Fax: ' + data['fax']);
-    $('#footer-tentang-kami').text(data['deskripsi']);
+    $('#footer-tentang-kami').text(data['tentangkami']);
 
     $('#organisasi-logo').empty();
     $('#organisasi-logo').text('EOPORTAL ' + data['organization']);
@@ -231,6 +231,7 @@ $.get(_api + 'berita/list', function(data) {
         $("#bj_" + i).text(items[i].judul);
         $("#bi_" + i).text($(items[i].isiberita).text());
         // $("#bi_" + i).text(strip(items[i].isiberita));
+        $("#href" + i).attr("href", "detail_berita.html?id=" + items[i].id)
         console.log(items[i]);
     }
 });

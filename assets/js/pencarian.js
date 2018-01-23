@@ -151,7 +151,7 @@ $.get(_api + "sisteminfo", function(data) {
     $('#phone').text('Telp: ' + data['phone']);
     $('#fax').text('Fax: ' + data['fax']);
     $('#fax-body').text('Fax: ' + data['fax']);
-    $('#footer-tentang-kami').text(data['deskripsi']);
+    $('#footer-tentang-kami').text(data['tentangkami']);
 
     $('#organisasi-logo').empty();
     $('#organisasi-logo').text('EOPORTAL ' + data['organization']);
