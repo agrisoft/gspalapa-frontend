@@ -227,12 +227,16 @@ function strip(html) {
 
 $.get(_api + 'berita/list', function(data) {
     items = JSON.parse(data);
-    for (i = 0; i < items.length; i++) {
-        $("#bj_" + i).text(items[i].judul);
-        $("#bi_" + i).text($(items[i].isiberita).text());
-        // $("#bi_" + i).text(strip(items[i].isiberita));
-        $("#href" + i).attr("href", "detail_berita.html?id=" + items[i].id)
-        console.log(items[i]);
+    if (items.length < 1) {
+        $("#beritawrapper").empty();
+    } else {
+        for (i = 0; i < items.length; i++) {
+            $("#bj_" + i).text(items[i].judul);
+            $("#bi_" + i).text($(items[i].isiberita).text());
+            // $("#bi_" + i).text(strip(items[i].isiberita));
+            $("#href" + i).attr("href", "detail_berita.html?id=" + items[i].id)
+            console.log(items[i]);
+        }
     }
 });
 
