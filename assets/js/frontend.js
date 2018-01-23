@@ -1,5 +1,5 @@
 //API untuk walidata http://192.168.100.55:8000/api/
-$.get(_api + "group/listl", function (data) {
+$.get(_api + "group/listl", function(data) {
     listdata = (data);
     //console.log(listdata);
     for (i = 0; i < listdata.length; i++) {
@@ -15,7 +15,7 @@ $.get(_api + "group/listl", function (data) {
 });
 
 ///API untuk Kagori
-$.get(_api + "jumlahdataset", function (data) {
+$.get(_api + "jumlahdataset", function(data) {
     listdata = (data);
     //console.log(listdata);
     for (i = 0; i < listdata.length; i++) {
@@ -31,7 +31,7 @@ $.get(_api + "jumlahdataset", function (data) {
 var layer = [];
 
 
-$.get(_api + "listmetalayer", function (data) {
+$.get(_api + "listmetalayer", function(data) {
     listdata = data;
     for (i = 0; i < 4; i++) {
         console.log(listdata[i], listdata[i]['identifier']);
@@ -53,12 +53,12 @@ $.get(_api + "listmetalayer", function (data) {
         maxx = parseFloat(bboxbox[1].split(' ')[0].split(')')[0])
         maxy = parseFloat(bboxbox[1].split(' ')[1].split(')')[0])
         extent = [minx, miny, maxx, maxy]
-        //console.log(extent)
-        $('#list-type').append('<div class="col-sm-6 col-md-3 p0"><div class="box-two proerty-item"><div class="item-thumb"><a><img src="' + image2 + '"</a></div><div class="item-entry overflow"><div id="ltitle"><a href="">' + listdata[i]['title'] + ' </a></div><div class="dot-hr"></div><span class="pull-left"><b>' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><i id="' + listdata[i]['identifier'] + '" class="material-icons preview" title="Lihat peta"><span id="lihatpeta" class="cursor_pointer">location_on</span><div style="display:none"><div id="ident">' + listdata[i]['identifier'] + '</div><div id="minx">' + minx + '</div><div id="miny">' + miny + '</div><div id="maxx">' + maxx + '</div><div id="maxy">' + maxy + '</div></div></i><i id="' + listdata[i]['identifier'] + '" class="material-icons" title="Lihat metadata" data-toggle="modal" data-target="#metaData"><span  id="infopeta"  class="cursor_pointer">info</span><div style="display:none"><div id="1ident">' + listdata[i]['identifier']  +'</div><div id="1wfs">' + listdata[i]['links'].split(',')[3].split('^')[0]  +'</div><div id="1wms">' + listdata[i]['links'].split(',')[6].split('^')[0]   +'</div><div id="1keywords">' + listdata[i]['keywords']  +'</div><div id="1abstract">' + listdata[i]['abstract']  + '</div><div id="1title">' + listdata[i]['title']  + '</div><div id="1type">' + listdata[i]['type']  +'</div><div id="1minx">' + minx + '</div><div id="1miny">' + miny + '</div><div id="1maxx">' + maxx + '</div><div id="1maxy">' + maxy + '</div></div></i><i class="material-icons" title="Download"><span class="cursor_pointer"  id="linkdonwload">cloud_download</span><div id="linkurl" style="display:none;">' + download + '</div></i></span><div class="property-icon"><b>' + array[0][0] + '</b></div></div></div>');
+            //console.log(extent)
+        $('#list-type').append('<div class="col-sm-6 col-md-3 p0"><div class="box-two proerty-item"><div class="item-thumb"><a><img src="' + image2 + '"</a></div><div class="item-entry overflow"><div id="ltitle"><a href="">' + listdata[i]['title'] + ' </a></div><div class="dot-hr"></div><span class="pull-left"><b>' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><i id="' + listdata[i]['identifier'] + '" class="material-icons preview" title="Lihat peta"><span id="lihatpeta" class="cursor_pointer">location_on</span><div style="display:none"><div id="ident">' + listdata[i]['identifier'] + '</div><div id="minx">' + minx + '</div><div id="miny">' + miny + '</div><div id="maxx">' + maxx + '</div><div id="maxy">' + maxy + '</div></div></i><i id="' + listdata[i]['identifier'] + '" class="material-icons" title="Lihat metadata" data-toggle="modal" data-target="#metaData"><span  id="infopeta"  class="cursor_pointer">info</span><div style="display:none"><div id="1ident">' + listdata[i]['identifier'] + '</div><div id="1wfs">' + listdata[i]['links'].split(',')[3].split('^')[0] + '</div><div id="1wms">' + listdata[i]['links'].split(',')[6].split('^')[0] + '</div><div id="1keywords">' + listdata[i]['keywords'] + '</div><div id="1abstract">' + listdata[i]['abstract'] + '</div><div id="1title">' + listdata[i]['title'] + '</div><div id="1type">' + listdata[i]['type'] + '</div><div id="1minx">' + minx + '</div><div id="1miny">' + miny + '</div><div id="1maxx">' + maxx + '</div><div id="1maxy">' + maxy + '</div></div></i><i class="material-icons" title="Download" id="' + listdata[i]['identifier'] + '" ><span class="cursor_pointer"  id="linkdonwload">cloud_download</span><div id="linkurl" style="display:none;">' + download + '</div></i></span><div class="property-icon"><b>' + array[0][0] + '</b></div></div></div>');
     }
 });
 
-$("#burgermenu").on('click', function () {
+$("#burgermenu").on('click', function() {
     console.log('BURGER');
     var ext = simpulextent.toString();
 
@@ -75,79 +75,83 @@ $("#burgermenu").on('click', function () {
 var extent;
 var linkdownload;
 
-$(document).ready(function () {
+$(document).ready(function() {
 
-    $(document).on('click', '.proerty-price.pull-right i', function () {
-        console.log($(this).find('#lihatpeta').text(), $(this).find('#linkdonwload').text());
-        if ($(this).find('#lihatpeta').text() == 'location_on') {
-            // console.log($(this).find('#lihatpeta').text());
-            p_id = $(this).attr('id');
-            console.log(p_id)
-            minx = parseFloat($(this).find('#minx').text())
-            miny = parseFloat($(this).find('#miny').text())
-            maxx = parseFloat($(this).find('#maxx').text())
-            maxy = parseFloat($(this).find('#maxy').text())
-            window.extent = $(this).find('#minx').text() + ',' + $(this).find('#miny').text() + ',' + $(this).find('#maxx').text() + ',' + $(this).find('#maxy').text()
-            try {
-                prevmap.removeLayer(preview);
-            } catch (error) {
+        $(document).on('click', '.proerty-price.pull-right i', function() {
+            console.log($(this).find('#lihatpeta').text(), $(this).find('#linkdonwload').text());
+            if ($(this).find('#lihatpeta').text() == 'location_on') {
+                // console.log($(this).find('#lihatpeta').text());
+                p_id = $(this).attr('id');
+                console.log(p_id)
+                minx = parseFloat($(this).find('#minx').text())
+                miny = parseFloat($(this).find('#miny').text())
+                maxx = parseFloat($(this).find('#maxx').text())
+                maxy = parseFloat($(this).find('#maxy').text())
+                window.extent = $(this).find('#minx').text() + ',' + $(this).find('#miny').text() + ',' + $(this).find('#maxx').text() + ',' + $(this).find('#maxy').text()
+                try {
+                    prevmap.removeLayer(preview);
+                } catch (error) {
 
+                }
+                add_prev_layer(p_id, minx, miny, maxx, maxy);
+                $("#viewPeta").modal('show');
+            } else if ($(this).find('#linkdonwload').text() == 'cloud_download') {
+                console.log($(this).attr('id'));
+                pushstatistik($(this).attr('id'), true, false);
+                console.log($(this).find('#linkurl').text());
+                window.open($(this).find('#linkurl').text(), '_blank');
+            } else if ($(this).find('#infopeta').text() == 'info') {
+                //pemanggilan metadata lengkap
+                m_id = $(this).attr('id');
+                open_metadata(m_id);
+
+                console.log(m_id)
+
+                console.log($(this).find('#1title').text())
+
+
+                console.log($(this).find('#1ident').text())
+
+
+
+
+                minx = parseFloat($(this).find('#1minx').text())
+                miny = parseFloat($(this).find('#1miny').text())
+                maxx = parseFloat($(this).find('#1maxx').text())
+                maxy = parseFloat($(this).find('#1maxy').text())
+
+
+                $('#type_title').val($(this).find('#1title').text())
+                $('#type_subject').val($(this).find('#1keywords').text())
+                $('#type_dataset').val($(this).find('#1type').text())
+                $('#type_abstract').val($(this).find('#1abstract').text())
+                $('#type_identifier').val(m_id)
+
+                $('#type_wms').val($(this).find('#1wms').text())
+                $('#type_wfs').val($(this).find('#1wfs').text())
+
+                $('#type_bbox').val("[ " + minx + ", " + miny + ", " + maxx + ", " + maxy + " ]")
+
+
+
+
+
+
+                //pemanggilan metadata lengkap
             }
-            add_prev_layer(p_id, minx, miny, maxx, maxy);
-            $("#viewPeta").modal('show');
-        } else if ($(this).find('#linkdonwload').text() == 'cloud_download') {
-            console.log($(this).find('#linkurl').text());
-            window.open($(this).find('#linkurl').text(), '_blank');
-        } else if ($(this).find('#infopeta').text() == 'info') {
-            //pemanggilan metadata lengkap
-            m_id = $(this).attr('id');
-            open_metadata(m_id);
-            
-            console.log(m_id)
+        });
 
-            console.log($(this).find('#1title').text())
+        i_search_map();
+        searchmap.getView().fit(simpulextent, searchmap.getSize());
 
-
-             console.log($(this).find('#1ident').text())
-
-        
-               
-
-                  minx = parseFloat($(this).find('#1minx').text())
-                  miny = parseFloat($(this).find('#1miny').text())
-                  maxx = parseFloat($(this).find('#1maxx').text())
-                  maxy = parseFloat($(this).find('#1maxy').text())
-
-   
-                   $('#type_title').val($(this).find('#1title').text())
-                   $('#type_subject').val($(this).find('#1keywords').text())  
-                   $('#type_dataset').val($(this).find('#1type').text()) 
-                   $('#type_abstract').val($(this).find('#1abstract').text())
-                   $('#type_identifier').val(m_id)
-
-                    $('#type_wms').val($(this).find('#1wms').text())
-                    $('#type_wfs').val($(this).find('#1wfs').text())
-
-                   $('#type_bbox').val("[ " + minx+", "+miny+", "+maxx+", "+maxy+" ]")
-
-          
-
-              
-             
-
-            //pemanggilan metadata lengkap
-        }
-    });
-
-    i_search_map();
-    searchmap.getView().fit(simpulextent, searchmap.getSize());
-})
-//API untuk sistem info http://192.168.100.55:8000/api/
+        pushstatistik('Utama', false, false);
+    })
+    //API untuk sistem info http://192.168.100.55:8000/api/
 
 var simpulextent = [];
 var ex = "";
 
-$.get(_api + "sisteminfo", function (data) {
+$.get(_api + "sisteminfo", function(data) {
     //listdata = JSON.parse(data);
     console.log(data);
     $('#title-index').text('Home :: Geoportal ' + data['organization']);
@@ -172,6 +176,7 @@ $.get(_api + "sisteminfo", function (data) {
     $('#organisasi-logo').empty();
     $('#organisasi-logo').text('EOPORTAL ' + data['organization']);
     $('#logos').attr('src', data['logo']);
+    $('#logosbawah').attr('src', data['logo']);
 
     $('#judul-slider-depan').text('Geoportal ' + data['organization']);
     var ex = "";
@@ -184,7 +189,7 @@ $.get(_api + "sisteminfo", function (data) {
 $.ajax({
     url: _api + "frontend",
     async: false,
-    success: function (data) {
+    success: function(data) {
         items = JSON.parse(data);
         console.log(items)
         slider1 = "<div class='item'><img src='" + items[0].image_1 + "'></div>";
@@ -202,7 +207,7 @@ $.ajax({
 $.ajax({
     url: _api + "linkweb/list",
     async: false,
-    success: function (data) {
+    success: function(data) {
         items = JSON.parse(data);
         console.log(items.length)
         for (i = 0; i < items.length; i++) {
@@ -213,6 +218,22 @@ $.ajax({
         // jssor_1_slider_init();
     }
 })
+
+function strip(html) {
+    var tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+}
+
+$.get(_api + 'berita/list', function(data) {
+    items = JSON.parse(data);
+    for (i = 0; i < items.length; i++) {
+        $("#bj_" + i).text(items[i].judul);
+        $("#bi_" + i).text($(items[i].isiberita).text());
+        // $("#bi_" + i).text(strip(items[i].isiberita));
+        console.log(items[i]);
+    }
+});
 
 var preview, prevmap, searchmap;
 
@@ -271,7 +292,7 @@ function i_search_map() {
     // $("#bbox").val('');
     // $("#bbox").val(extents);
 
-    searchmap.on("moveend", function (evt) {
+    searchmap.on("moveend", function(evt) {
         var map = evt.map;
         var extents = map.getView().calculateExtent(map.getSize());
 
@@ -294,7 +315,7 @@ function i_search_map() {
 
 }
 
-$(".largesearch-btn").on('click', function () {
+$(".largesearch-btn").on('click', function() {
 
     var e = document.getElementById("lunchBegins");
     var lunchBegins = e.options[e.selectedIndex].value;
@@ -307,7 +328,7 @@ $(".largesearch-btn").on('click', function () {
     var walidata = lunchBegins2;
 });
 
-$("#viewPeta").on('shown.bs.modal', function () {
+$("#viewPeta").on('shown.bs.modal', function() {
     if ($("#i_prev_map").text() == '') {
         p_id = $("#viewPeta").find('i');
         i_prev_map();
@@ -321,13 +342,13 @@ $("#viewPeta").on('shown.bs.modal', function () {
     }
 });
 
-$("#viewPeta").on('hide.bs.modal', function () {
+$("#viewPeta").on('hide.bs.modal', function() {
     //
 });
 
 var searchextent;
 
-$("#searchbtn").submit(function () {
+$("#searchbtn").submit(function() {
     $("#bbox").val(window.bbox)
     alert(window.bbox)
 })
@@ -347,4 +368,37 @@ function metadataFull() {
         $("#thebutton").text("Metadata Lengkap").button("refresh");
 
     }
+}
+
+function pushstatistik(halaman, download, pencarian) {
+    var params = {};
+    // params.halaman = halaman;
+    // params.download = download;
+    $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
+        console.log(JSON.stringify(data, null, 2));
+        params.halaman = halaman;
+        params.download = download;
+        params.pencarian = pencarian;
+        params.ip = data.ip;
+        params.country_code = data.country_code;
+        params.country_name = data.country_name;
+        params.region_code = data.region_code;
+        params.region_name = data.region_name;
+        params.city = data.city;
+        params.zip_code = data.zip_code;
+        params.time_zone = data.time_zone;
+        params.latitude = data.latitude;
+        params.longitude = data.longitude;
+        params.metro_code = data.metro_code;
+        console.log(params);
+        // var data = $.param({
+        //     json: JSON.stringify({
+        //         pubdata: params
+        //     })
+        // });
+        // $.post(_api + "statistik/push", data).success(function(data, status) {
+        //     console.log(data);
+        // });
+        $.post(_api + "statistik/push", params);
+    });
 }

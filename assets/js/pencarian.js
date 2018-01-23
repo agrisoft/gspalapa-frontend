@@ -156,9 +156,15 @@ $.get(_api + "sisteminfo", function(data) {
     $('#organisasi-logo').empty();
     $('#organisasi-logo').text('EOPORTAL ' + data['organization']);
     $('#logos').attr('src', data['logo']);
+    $('#logosbawah').attr('src', data['logo']);
 
     $('#judul-slider-depan').text('Geoportal ' + data['organization']);
 });
+
+if (getUrlParameter('keyword')) {
+
+    pushstatistik(getUrlParameter('keyword'), false, true);
+}
 
 
 jQuery.ajax({
@@ -229,9 +235,9 @@ jQuery.ajax({
             console.log(download);
 
 
-            
 
-            $('#list-type').append('<div class="col-sm-6 col-md-4 p0"><div class="box-two proerty-item"><div class="item-thumb"><a><img src="' + image2 + '"</a></div><div class="item-entry overflow"><div id="ltitle"><a href="">' + listdata[i]['title'] + ' </a></div><div class="dot-hr"></div><span class="pull-left"><b>' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><i id="' + listdata[i]['identifier'] + '" class="material-icons preview" title="Lihat peta"><span id="lihatpeta" class="cursor_pointer">location_on</span><div style="display:none"><div id="ident">' + listdata[i]['identifier'] + '</div><div id="minx">' + minx + '</div><div id="miny">' + miny + '</div><div id="maxx">' + maxx + '</div><div id="maxy">' + maxy + '</div></div></i><i id="' + listdata[i]['identifier'] + '" class="material-icons" title="Lihat metadata" data-toggle="modal" data-target="#metaData"><span id="infopeta" class="cursor_pointer">info</span><div style="display:none"><div id="1ident">' + listdata[i]['identifier']  + '</div><div id="1wfs">' + listdata[i]['links'].split(',')[3].split('^')[0]  +'</div><div id="1wms">' + listdata[i]['links'].split(',')[6].split('^')[0]   +'</div><div id="1keywords">' + listdata[i]['keywords']  +'</div><div id="1abstract">' + listdata[i]['abstract']  + '</div><div id="1title">' + listdata[i]['title']  + '</div><div id="1type">' + listdata[i]['type']  +'</div><div id="1minx">' + minx + '</div><div id="1miny">' + miny + '</div><div id="1maxx">' + maxx + '</div><div id="1maxy">' + maxy + '</div></div></i><i class="material-icons" title="Download"><span class="cursor_pointer"  id="linkdonwload">cloud_download</span><div id="linkurl" style="display:none;">' + download + '</div></i></span><div class="property-icon"><b>' + array[0][0] + '</b></div></div></div>');
+
+            $('#list-type').append('<div class="col-sm-6 col-md-4 p0"><div class="box-two proerty-item"><div class="item-thumb"><a><img src="' + image2 + '"</a></div><div class="item-entry overflow"><div id="ltitle"><a href="">' + listdata[i]['title'] + ' </a></div><div class="dot-hr"></div><span class="pull-left"><b>' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><i id="' + listdata[i]['identifier'] + '" class="material-icons preview" title="Lihat peta"><span id="lihatpeta" class="cursor_pointer">location_on</span><div style="display:none"><div id="ident">' + listdata[i]['identifier'] + '</div><div id="minx">' + minx + '</div><div id="miny">' + miny + '</div><div id="maxx">' + maxx + '</div><div id="maxy">' + maxy + '</div></div></i><i id="' + listdata[i]['identifier'] + '" class="material-icons" title="Lihat metadata" data-toggle="modal" data-target="#metaData"><span id="infopeta" class="cursor_pointer">info</span><div style="display:none"><div id="1ident">' + listdata[i]['identifier'] + '</div><div id="1wfs">' + listdata[i]['links'].split(',')[3].split('^')[0] + '</div><div id="1wms">' + listdata[i]['links'].split(',')[6].split('^')[0] + '</div><div id="1keywords">' + listdata[i]['keywords'] + '</div><div id="1abstract">' + listdata[i]['abstract'] + '</div><div id="1title">' + listdata[i]['title'] + '</div><div id="1type">' + listdata[i]['type'] + '</div><div id="1minx">' + minx + '</div><div id="1miny">' + miny + '</div><div id="1maxx">' + maxx + '</div><div id="1maxy">' + maxy + '</div></div></i><i class="material-icons" title="Download" id="' + listdata[i]['identifier'] + '" ><span class="cursor_pointer"  id="linkdonwload">cloud_download</span><div id="linkurl" style="display:none;">' + download + '</div></i></span><div class="property-icon"><b>' + array[0][0] + '</b></div></div></div>');
 
             // $('#list-type').append(' <div class="list-item"> <div class="col-sm-6 col-md-4 p0"><div class="box-two proerty-item"><div class="item-thumb"><a href="#"><img src="' + image2 + '"</a></div><div class="item-entry overflow"><h5><a href="" class="title">' + listdata[i]['title'] + ' </a></h5><div class="dot-hr"></div><span class="pull-left"><b class="' + listdata[i]['keywords'] + '">' + listdata[i]['keywords'] + '</b></span><span class="proerty-price pull-right"><img src="assets/img/maps_look.png" width="20px" height="20px" title="Lihat peta" data-toggle="modal" data-target="#viewPeta" class="cursor_pointer"><img src="assets/img/metadata.png"  id="' + listdata[i]['identifier'] + '" width="20px" height="20px" title="Lihat metadata" data-toggle="modal" data-target="#metaData" class="cursor_pointer"><img src="assets/img/download.png" width="20px" height="20px" title="Download" data-toggle="modal" data-target="#downloadModal" class="cursor_pointer"></span><p style="display: none;">' + listdata[i]['abstract'] + '</p><div class="property-icon"><b class="' + array[0][0] + '">' + array[0][0] + '</b></div></div></div></div> ');
         }
@@ -356,7 +362,7 @@ var linkdownload;
 $(document).ready(function() {
 
 
- 
+
     console.log('halo2', extent2);
 
     // Compute the current extent of the view given the map size
@@ -392,47 +398,48 @@ $(document).ready(function() {
             add_prev_layer(p_id, minx, miny, maxx, maxy);
             $("#viewPeta").modal('show');
         } else if ($(this).find('#linkdonwload').text() == 'cloud_download') {
+            pushstatistik($(this).attr('id'), true, false);
             console.log($(this).find('#linkurl').text());
             window.open($(this).find('#linkurl').text(), '_blank');
         } else if ($(this).find('#infopeta').text() == 'info') {
             //pemanggilan metadata lengkap
             m_id = $(this).attr('id');
             open_metadata(m_id);
-            
+
             console.log(m_id)
 
 
-             console.log($(this).find('#1title').text())
+            console.log($(this).find('#1title').text())
 
-        
-               
 
-                  minx = parseFloat($(this).find('#1minx').text())
-                  miny = parseFloat($(this).find('#1miny').text())
-                  maxx = parseFloat($(this).find('#1maxx').text())
-                  maxy = parseFloat($(this).find('#1maxy').text())
 
-                  //pemanggilan metadata   
-                   $('#type_title').val($(this).find('#1title').text())
-                   $('#type_subject').val($(this).find('#1keywords').text())  
-                   $('#type_dataset').val($(this).find('#1type').text()) 
-                   $('#type_abstract').val($(this).find('#1abstract').text())
-                   $('#type_identifier').val(m_id)
 
-                    $('#type_wms').val($(this).find('#1wms').text())
-                    $('#type_wfs').val($(this).find('#1wfs').text())
+            minx = parseFloat($(this).find('#1minx').text())
+            miny = parseFloat($(this).find('#1miny').text())
+            maxx = parseFloat($(this).find('#1maxx').text())
+            maxy = parseFloat($(this).find('#1maxy').text())
 
-                   $('#type_bbox').val("[ " + minx+", "+miny+", "+maxx+", "+maxy+" ]")
+            //pemanggilan metadata   
+            $('#type_title').val($(this).find('#1title').text())
+            $('#type_subject').val($(this).find('#1keywords').text())
+            $('#type_dataset').val($(this).find('#1type').text())
+            $('#type_abstract').val($(this).find('#1abstract').text())
+            $('#type_identifier').val(m_id)
 
-          
+            $('#type_wms').val($(this).find('#1wms').text())
+            $('#type_wfs').val($(this).find('#1wfs').text())
 
-              
-             
+            $('#type_bbox').val("[ " + minx + ", " + miny + ", " + maxx + ", " + maxy + " ]")
+
+
+
+
+
 
 
         }
     });
-
+    pushstatistik('Pencarian', false, false);
 });
 
 map.getView().on('propertychange', function(e) {
@@ -522,3 +529,37 @@ $("#viewPeta").on('shown.bs.modal', function() {
 $("#viewPeta").on('hide.bs.modal', function() {
     //
 });
+
+
+function pushstatistik(halaman, download, pencarian) {
+    var params = {};
+    // params.halaman = halaman;
+    // params.download = download;
+    $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
+        console.log(JSON.stringify(data, null, 2));
+        params.halaman = halaman;
+        params.download = download;
+        params.pencarian = pencarian;
+        params.ip = data.ip;
+        params.country_code = data.country_code;
+        params.country_name = data.country_name;
+        params.region_code = data.region_code;
+        params.region_name = data.region_name;
+        params.city = data.city;
+        params.zip_code = data.zip_code;
+        params.time_zone = data.time_zone;
+        params.latitude = data.latitude;
+        params.longitude = data.longitude;
+        params.metro_code = data.metro_code;
+        console.log(params);
+        // var data = $.param({
+        //     json: JSON.stringify({
+        //         pubdata: params
+        //     })
+        // });
+        // $.post(_api + "statistik/push", data).success(function(data, status) {
+        //     console.log(data);
+        // });
+        $.post(_api + "statistik/push", params);
+    });
+}

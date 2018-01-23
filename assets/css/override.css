@@ -76,3 +76,120 @@
 .navbarjmenu {
     color: black;
 }
+
+#logosbawah {
+    width: 75px;
+    height: auto;
+    margin-left: 15px;
+}
+
+.stat_a {
+    padding: 20px;
+    background: white;
+    margin-bottom: 20px;
+    border: #777;
+    border-style: solid;
+    border-width: 0.5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.stat_b {
+    padding: 20px;
+    background: white;
+    margin-bottom: 20px;
+    border: #777;
+    border-style: solid;
+    border-width: 0.5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.stat_c {
+    padding: 20px;
+    background: white;
+    margin-bottom: 20px;
+    border: #777;
+    border-style: solid;
+    border-width: 0.5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.stat_d {
+    padding: 20px;
+    background: white;
+    border: #777;
+    border-style: solid;
+    border-width: 0.5px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+#stat_map {
+    height: 600px;
+    width: 100%;
+    border: #777;
+    border-style: solid;
+    border-width: 0.5px;
+}
+
+.stat_con {
+    position: absolute;
+    left: 170px;
+    font-weight: bold;
+}
+
+.asks-first_b {
+    background: #fff1cd;
+    border-width: 0.25px;
+    border: #d1b97a;
+    border-style: solid;
+    height: 200px;
+    max-height: 200px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.asks-first-info_b {}
+
+.bj {
+    font-size: large;
+    margin-left: 20px;
+}
+
+.bi {
+    font-weight: initial;
+    margin-left: 20px;
+    margin-right: 20px;
+    max-height: 125px;
+    height: 120px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.isiberita {
+    font-weight: initial;
+    height: 150px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    margin-bottom: 15px;
+}
+
+#beritalist {
+    list-style-type: none;
+}
+
+.pagination>li>a,
+.pagination>li>span,
+.pagination>li:first-child>a,
+.pagination>li:first-child>span,
+.pagination>li:last-child>a,
+.pagination>li:last-child>span {
+    border-radius: 2%;
+    margin: 0 2px;
+    color: #777777;
+}
+
+#pager {
+    margin-left: 50px;
+}
